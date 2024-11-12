@@ -1,81 +1,108 @@
 "use client";
-import { useState } from "react";
-import { BiCheckCircle, BiPencil } from "react-icons/bi";
-import { FaSearch } from "react-icons/fa";
+import { useRef, useState } from "react";
+import { BiCheckCircle, BiLoaderCircle, BiPencil } from "react-icons/bi";
 import Link from "next/link";
-import { HeroSection } from "./components/HeroSection";
-import { OptionCard } from "./components/OptionCard";
-import { CategoryCard } from "./components/CategoryCard";
-import { SpecGuideCard } from "./components/SpecGuideCard";
+import { HeroSection } from "@/components/HeroSection";
+import { OptionCard } from "@/components/OptionCard";
+import { CategoryCard } from "@/components/CategoryCard";
 import { laptopCategories, specGuides } from "./data";
-// import QuizComponent from '@/components/QuizComponent';
 import QuizComponet from "../../components/QuizComponet";
 import { QuizAnswers } from "@/interfaces/interfaces";
-import { useMyStore } from "@/stores/MyStore";
 import { deleteLaptopsLocalStore, setLaptopsLocalStore } from "@/lib/utils";
-import { getRecommendations } from "@/lib/action";
+import { getRecommendations, getRecommendationsImage } from "@/lib/action";
 import { redirect } from "next/navigation";
-// Add these types and interfaces near the top of the file
-// import router, {  } from 'next/router'
+import { SpecGuideCard } from "@/components/SpecGuideCard";
 
 export default function Home() {
   const [activeOption, setActiveOption] = useState("");
-  const { reccomendations, setRecommendations } = useMyStore();
 
   const [getRecsName, setGetRecsName] = useState<string>("Get Recommendations");
+  const [submitName, setSubmitName] = useState<string | JSX.Element>("Submit");
 
   const handleUserAnswer = async (data: QuizAnswers) => {
     setGetRecsName("");
     const res = await getRecommendations(data as QuizAnswers);
-    deleteLaptopsLocalStore();
+    try {
+      deleteLaptopsLocalStore();
+    } catch (e) {
+      console.log(e);
+    }
     const apiReccomendations: string = res.aai;
 
     setLaptopsLocalStore(apiReccomendations);
 
-    // console.log(apiReccomendations);
-
-    // const list: Laptop[] = JSON.parse(res.data);
-    // setRecommendations(apiReccomendations);
-
     setGetRecsName("Get Recommendations");
-    // router.push('/home/recommendations', undefined, { shallow: true })
+
     redirect("/home/recommendations");
   };
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
-  const localStorageChecker = () => {
-    deleteLaptopsLocalStore();
+  const describe = async () => {
+    setSubmitName(<BiLoaderCircle className="text-xl animate-spin" />);
+    const data = textAreaRef.current?.value;
+    // try {
+    // Get recommendations and remove previous ones
+    const res = await getRecommendations(data as string);
+    const recommendations = res.aai; // Ensure proper JSON string
+    console.log(res.aai);
+    // try {
+    //   deleteLaptopsLocalStore();
+    // } catch (e) {
+    //   console.log(e);
+    // }
+    // Save new recommendations to local storage
+    setLaptopsLocalStore(recommendations);
+
+    setSubmitName("Submit");
+
+    redirect("/home/recommendations");
+
+    // Redirect to recommendations page
+    // redirect("/home/recommendations");
+    // } catch (error) {
+    //   console.error("Error processing recommendations:", error);
+    //   setSubmitName("Submit");
+    // }
   };
+
+  const imageUpload = async () => {
+    const file = imageInputRef.current?.files?.[0];
+    if (!file) return;
+    setSubmitName(<BiLoaderCircle className="text-xl animate-spin" />);
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const res = await getRecommendationsImage(formData); // Pass formData here
+      const laptopRecommendations = res.aai;
+      console.log(laptopRecommendations);
+      setLaptopsLocalStore(laptopRecommendations);
+      setSubmitName("Submit");
+      redirect("/home/recommendations");
+    } catch (error) {
+      console.error("Failed to upload image:", error);
+    }
+  };
+
+  const [imagePreview, setImagePreview] = useState<ArrayBuffer | string | null>(
+    null
+  );
+
+  const handleImageChange = (e: any) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const imageInputRef = useRef<HTMLInputElement>(null);
   const renderContent = () => {
     switch (activeOption) {
-      case "image":
-        return (
-          <div className="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
-            <div className="border-2 border-dashed border-[#0067b8]/20 rounded-lg p-8 text-center">
-              <label className="cursor-pointer">
-                <input
-                  type="file"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={(e) => {
-                    // Handle image upload here
-                  }}
-                />
-                <div className="flex flex-col items-center">
-                  <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4">
-                    <FaSearch className="text-2xl text-[#0067b8]" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                    Upload Your Image
-                  </h3>
-                  <p className="text-gray-600 mb-2">
-                    Click to upload an image or drag and drop
-                  </p>
-                  <p className="text-sm text-gray-500">PNG, JPG up to 10MB</p>
-                </div>
-              </label>
-            </div>
-          </div>
-        );
       case "quiz":
         return (
           <div className="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
@@ -99,6 +126,7 @@ export default function Home() {
               </h3>
             </div>
             <textarea
+              ref={textAreaRef}
               className="w-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#0067b8] focus:border-[#0067b8] transition-all duration-200"
               placeholder="Tell us about your ideal laptop. Consider mentioning your intended use, preferred features, and any specific requirements..."
               maxLength={350}
@@ -106,26 +134,31 @@ export default function Home() {
             ></textarea>
             <div className="flex justify-between items-center mt-3">
               <p className="text-sm text-gray-500">Maximum 350 characters</p>
-              <button className="px-6 py-2 bg-[#0067b8] text-white rounded-full hover:bg-blue-700 transition-colors duration-300">
-                Submit
+              <button
+                onClick={() => {
+                  describe();
+                }}
+                className="px-6 w-[100px] flex justify-center items-center py-2 bg-[#0067b8] text-white rounded-full hover:bg-blue-700 transition-colors duration-300"
+              >
+                {submitName}
               </button>
             </div>
           </div>
         );
       default:
-        return null;
+        return <div></div>;
     }
   };
 
   return (
     <div className="min-h-screen bg-[#fafafa] ">
-      {/* remove for testing only */}
+      {/* remove for testing only
       <button
         onClick={localStorageChecker}
         className="bg-red-600 hover:bg-red-500 w-[200px] h-[60px] rounded-full text-white border-[2px] mt-[20px] fixed border-black"
       >
         CHECK LOCL STORAGE
-      </button>
+      </button> */}
 
       <HeroSection
         title="Find Your Perfect Laptop"
@@ -152,15 +185,6 @@ export default function Home() {
             title="Describe Your Needs"
             description="Tell us in your own words what you're looking for in a laptop. Our AI will analyze your description."
             tags={["2-3 minutes", "Free form", "Natural language"]}
-          />
-
-          <OptionCard
-            isSelected={activeOption === "image"}
-            onClick={() => setActiveOption("image")}
-            icon={<FaSearch className="text-2xl text-[#0067b8]" />}
-            title="Search by Image"
-            description="Upload a photo of a laptop you like, and we'll find similar options that match your style."
-            tags={["Visual search", "AI-powered", "Quick results"]}
           />
         </div>
 
@@ -230,147 +254,3 @@ export default function Home() {
     </div>
   );
 }
-
-const itemsString = `recommendations": [
-    {
-      "name": "Acer Swift 3 SF314-511",
-      "imageUrl": "",
-      "priceRange": 700,
-      "specs": {
-        "cpu": "Intel Core i5-1135G7",
-        "gpu": "Intel Iris Xe Graphics",
-        "ram": 8,
-        "storage": 512,
-        "display": "14.0 inches, 1920 x 1080 pixels",
-        "battery": 10,
-        "weight": "1.2 kg"
-      },
-      "pros": [
-        "Lightweight and portable",
-        "Good battery life",
-        "Decent performance for everyday tasks"
-      ],
-      "cons": [
-        "Average display quality",
-        "Limited upgrade options"
-      ],
-      "shoppingLinks": [
-        "https://www.amazon.com/s?k=Acer+Swift+3+SF314-511",
-        "https://www.smartprix.com/products/?q=Acer+Swift+3+SF314-511"
-      ],
-      "summary": "The Acer Swift 3 SF314-511 is a great option for those who need a lightweight and portable laptop for basic tasks. It has a good battery life and decent performance, but the display quality is average and there are limited upgrade options."
-    },
-    {
-      "name": "Lenovo IdeaPad Flex 5",
-      "imageUrl": "",
-      "priceRange": 800,
-      "specs": {
-        "cpu": "AMD Ryzen 5 5500U",
-        "gpu": "AMD Radeon Graphics",
-        "ram": 8,
-        "storage": 512,
-        "display": "14.0 inches, 1920 x 1080 pixels",
-        "battery": 8,
-        "weight": "1.5 kg"
-      },
-      "pros": [
-        "Convertible design, can be used as a tablet",
-        "Good performance for work and school tasks",
-        "Decent battery life"
-      ],
-      "cons": [
-        "Can be a bit heavy for constant travel",
-        "Touchscreen can be unresponsive at times"
-      ],
-      "shoppingLinks": [
-        "https://www.amazon.com/s?k=Lenovo+IdeaPad+Flex+5",
-        "https://www.smartprix.com/products/?q=Lenovo+IdeaPad+Flex+5"
-      ],
-      "summary": "The Lenovo IdeaPad Flex 5 is a good choice for those who need a versatile laptop that can be used for work, school, and entertainment. It has a convertible design, good performance, and decent battery life, but it can be a bit heavy and the touchscreen can be unresponsive at times."
-    },
-    {
-      "name": "HP Envy x360 13",
-      "imageUrl": "",
-      "priceRange": 900,
-      "specs": {
-        "cpu": "Intel Core i7-1165G7",
-        "gpu": "Intel Iris Xe Graphics",
-        "ram": 16,
-        "storage": 512,
-        "display": "13.3 inches, 1920 x 1080 pixels",
-        "battery": 10,
-        "weight": "1.3 kg"
-      },
-      "pros": [
-        "Premium design and build quality",
-        "Excellent display quality",
-        "Good performance for demanding tasks"
-      ],
-      "cons": [
-        "Higher price point",
-        "Limited storage upgrade options"
-      ],
-      "shoppingLinks": [
-        "https://www.amazon.com/s?k=HP+Envy+x360+13",
-        "https://www.smartprix.com/products/?q=HP+Envy+x360+13"
-      ],
-      "summary": "The HP Envy x360 13 is a high-end laptop with a premium design, excellent display quality, and good performance. However, it comes at a higher price point and has limited storage upgrade options."
-    },
-    {
-      "name": "Dell XPS 13 9315",
-      "imageUrl": "",
-      "priceRange": 1200,
-      "specs": {
-        "cpu": "Intel Core i7-1195G7",
-        "gpu": "Intel Iris Xe Graphics",
-        "ram": 16,
-        "storage": 512,
-        "display": "13.4 inches, 1920 x 1200 pixels",
-        "battery": 10,
-        "weight": "1.2 kg"
-      },
-      "pros": [
-        "Stunning display quality",
-        "Excellent performance for demanding tasks",
-        "Great battery life"
-      ],
-      "cons": [
-        "Expensive",
-        "Limited upgrade options"
-      ],
-      "shoppingLinks": [
-        "https://www.amazon.com/s?k=Dell+XPS+13+9315",
-        "https://www.smartprix.com/products/?q=Dell+XPS+13+9315"
-      ],
-      "summary": "The Dell XPS 13 9315 is a high-end laptop with a stunning display, excellent performance, and great battery life. However, it is expensive and has limited upgrade options."
-    },
-    {
-      "name": "ASUS ZenBook 13 UX325",
-      "imageUrl": "",
-      "priceRange": 800,
-      "specs": {
-        "cpu": "Intel Core i7-1165G7",
-        "gpu": "Intel Iris Xe Graphics",
-        "ram": 8,
-        "storage": 512,
-        "display": "13.3 inches, 1920 x 1080 pixels",
-        "battery": 10,
-        "weight": "1.1 kg"
-      },
-      "pros": [
-        "Lightweight and portable",
-        "Good performance for everyday tasks",
-        "Long battery life"
-      ],
-      "cons": [
-        "Average display quality",
-        "Limited upgrade options"
-      ],
-      "shoppingLinks": [
-        "https://www.amazon.com/s?k=ASUS+ZenBook+13+UX325",
-        "https://www.smartprix.com/products/?q=ASUS+ZenBook+13+UX325"
-      ],
-      "summary": "The ASUS ZenBook 13 UX325 is a good choice for those who need a lightweight and portable laptop for basic tasks. It has good performance, long battery life, but the display quality is average and there are limited upgrade options."
-    }
-  ]
-}`;
