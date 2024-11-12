@@ -14,7 +14,7 @@ export function getLaptopsLocalStore() {
     JSON.stringify(localStorage.getItem("laptop-recommendations"))
   );
 
-  return JSON.parse(data).recommendations;
+  return JSON.parse(JSON.parse(data)).recommendations;
 }
 
 export function deleteLaptopsLocalStore() {
