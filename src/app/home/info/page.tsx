@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 import { useState, useRef, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { ChatComponent } from "../components/ChatComponent";
+import { ChatComponent } from "../../../components/ChatComponent";
 import { Laptop, LaptopSpecs } from "../../../interfaces/interfaces";
 import { getLaptopFromLocalStore} from "@/lib/utils";
 

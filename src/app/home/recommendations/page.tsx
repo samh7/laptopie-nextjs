@@ -16,6 +16,7 @@ export default function Recommendations() {
     const data = getLaptopsLocalStore();
     // console.log(data.recommendations);
     setRecommendations(data);
+    console.log(data);
   }, []); // Only run once on mount
 
   useEffect(() => {
@@ -46,13 +47,13 @@ export default function Recommendations() {
 
   return (
     <div className="min-h-screen bg-[#fafafa]">
-      {/* remove for testing only */}
+      {/* remove for testing only
       <button
         onClick={localStorageChecker}
         className="bg-red-600 hover:bg-red-500 w-[200px] h-[60px] rounded-full text-white border-[2px] mt-[20px] fixed border-black"
       >
         CHECK LOCL STORAGE
-      </button>
+      </button> */}
 
       {/* Enhanced Hero Section - Creative Design */}
       <div className="bg-gradient-to-r from-[#0067b8] to-[#2b5797] text-white">
