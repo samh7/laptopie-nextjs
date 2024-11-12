@@ -28,7 +28,6 @@ export async function POST(req: NextRequest) {
     If user asks for unattainable specs like a laptop.
     Try to recommend as close to their budget as possible.
     The currency should be in kenya shillings.
-    Recommend laptops for as low as 20000 shillings depending on query.
     All metrics should be in the metric system.
   `;
 
@@ -38,27 +37,11 @@ export async function POST(req: NextRequest) {
   const result = await model.generateContent(prompt);
   console.log(result.response.text());
 
-  // return NextResponse.json(
-  //   { message: "This is a post request", data: result.response.text() },
-  //   { status: 200 }
-  // );
-
-  // Remove trailing commas from each object within the "recommendations" array
-  // const cleanedRecommendations = JSON.parse().recommendations.map(
-  //   (recommendation: Laptop) => {
-  //     const cleanedRecommendation = { ...recommendation };
-  //     // if(cleanedRecommendation.specs.battery){ // Create a copy
-  //     delete cleanedRecommendation.specs.battery;
-  //     // } // Remove trailing comma in "specs"
-  //     delete cleanedRecommendation.pros[4]; // Remove trailing comma in "pros"
-  //     delete cleanedRecommendation.cons[2]; // Remove trailing comma in "cons"
-  //     delete cleanedRecommendation.shoppingLinks[1]; // Remove trailing comma in "shoppinLinks"
-  //     return cleanedRecommendation;
-  //   }
-  // );
   return NextResponse.json(
     {
-      aai: JSON.stringify(result.response.text().replace("```json", "").replace("```", "")),
+      aai: JSON.stringify(
+        result.response.text().replace("```json", "").replace("```", "")
+      ),
       data: JSON.stringify(userAnswers),
     },
     { status: 200 }
