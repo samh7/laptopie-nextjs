@@ -1,4 +1,4 @@
-import { Laptop } from "@/interfaces/interfaces";
+import { Laptop } from "@/lib/interfaces/interfaces";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 

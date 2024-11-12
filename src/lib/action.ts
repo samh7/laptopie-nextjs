@@ -1,6 +1,6 @@
 "use server";
 
-import { QuizAnswers } from "@/interfaces/interfaces";
+import { QuizAnswers } from "@/lib/interfaces/interfaces";
 
 export async function getRecommendations(data: QuizAnswers | string) {
   "use server";
