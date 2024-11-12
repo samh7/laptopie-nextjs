@@ -2,16 +2,16 @@
 import { useRef, useState } from "react";
 import { BiCheckCircle, BiLoaderCircle, BiPencil } from "react-icons/bi";
 import Link from "next/link";
-import { HeroSection } from "@/components/HeroSection";
-import { OptionCard } from "@/components/OptionCard";
-import { CategoryCard } from "@/components/CategoryCard";
-import { laptopCategories, specGuides } from "./data";
-import QuizComponet from "../../components/QuizComponet";
-import { QuizAnswers } from "@/interfaces/interfaces";
+import { HeroSection } from "@/components/home/HeroSection";
+import { OptionCard } from "@/components/home/OptionCard";
+import { CategoryCard } from "@/components/home/CategoryCard";
+import { laptopCategories, specGuides } from "../../data/data";
+import QuizComponet from "../../components/home/QuizComponet";
+import { QuizAnswers } from "@/lib/interfaces/interfaces";
 import { deleteLaptopsLocalStore, setLaptopsLocalStore } from "@/lib/utils";
 import { getRecommendations, getRecommendationsImage } from "@/lib/action";
 import { redirect } from "next/navigation";
-import { SpecGuideCard } from "@/components/SpecGuideCard";
+import { SpecGuideCard } from "@/components/home/SpecGuideCard";
 
 export default function Home() {
   const [activeOption, setActiveOption] = useState("");
