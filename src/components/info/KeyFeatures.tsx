@@ -9,7 +9,7 @@ export default function KeyFeatures({
 }) {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
-      {/* Key Features Cards - Microsoft Style */}
+      {/* Key Features Cards*/}
       <div className="grid md:grid-cols-3 gap-8 mb-16">
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
           <BiExpandAlt className="text-[#0067b8] text-3xl mb-4" />
