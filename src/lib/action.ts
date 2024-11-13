@@ -43,7 +43,6 @@ export async function chatWithLaptop(data: string) {
     body: JSON.stringify(data),
   });
 
-  // Parse the response data before returning
   const responseData = await res.json();
   return responseData;
 }
@@ -60,7 +59,6 @@ export async function getRecommendationsFree(data: string) {
     body: JSON.stringify(data),
   });
 
-  // Parse the response data before returning
   const responseData = await res.json();
   return responseData;
 }
