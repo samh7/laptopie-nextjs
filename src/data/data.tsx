@@ -7,7 +7,14 @@ import {
 import { BsCpu, BsGpuCard, BsMemory } from "react-icons/bs";
 import { BiChip, BiCog, BiLaptop, BiMemoryCard } from "react-icons/bi";
 import { FAQItem, UseCase } from "@/lib/interfaces/interfaces";
-import { FiBookOpen, FiBriefcase, FiCamera, FiCode, FiMonitor, FiPlay } from "react-icons/fi";
+import {
+  FiBookOpen,
+  FiBriefcase,
+  FiCamera,
+  FiCode,
+  FiMonitor,
+  FiPlay,
+} from "react-icons/fi";
 
 interface Specification {
   title: string;
@@ -438,7 +445,6 @@ export const specsList = [
   },
 ];
 
-
 export const useCases: UseCase[] = [
   {
     icon: FiPlay,
@@ -472,9 +478,7 @@ export const useCases: UseCase[] = [
   },
 ];
 
-
-export 
-const faqs: FAQItem[] = [
+export const faqs: FAQItem[] = [
   {
     question: "How accurate are the laptop recommendations?",
     answer:
@@ -496,7 +500,6 @@ const faqs: FAQItem[] = [
       "Absolutely! Our system allows you to compare multiple recommended laptops side by side, helping you make an informed decision.",
   },
 ];
-
 
 export function getRandomLaptopImage(laptopName: string) {
   const laptopBrands = [
@@ -535,12 +538,10 @@ export function getRandomLaptopImage(laptopName: string) {
 
   const genericImage = "/laptop_brands/generic.jpg";
 
-  // Extract brand name from laptop name
   const brandName = laptopBrands
     .find((brand) => laptopName.toLowerCase().includes(brand.toLowerCase()))
     ?.toLowerCase();
 
-  // Return brand-specific image or generic image
   return brandName && laptopBrandImages[brandName]
     ? laptopBrandImages[brandName]
     : genericImage;
