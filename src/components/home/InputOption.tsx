@@ -64,6 +64,15 @@ export default function InputOption({
         </div>
       );
     default:
-      return <div></div>;
+      return (
+        <div className="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
+          <QuizComponet
+            getRecsName={getRecsName}
+            onQuizComplete={(data: QuizAnswers) => {
+              handleUserAnswer(data);
+            }}
+          />
+        </div>
+      );
   }
 }
