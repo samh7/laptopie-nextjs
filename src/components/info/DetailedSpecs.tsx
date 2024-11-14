@@ -1,3 +1,4 @@
+"use client";
 import { FaInfoCircle } from "react-icons/fa";
 import { Laptop, LaptopSpecs } from "@/lib/interfaces/interfaces";
 import {

@@ -1,3 +1,4 @@
+"use client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { LucideIcon, Brain, Zap, Sparkles, Users, Laptop, Filter } from "lucide-react"
 

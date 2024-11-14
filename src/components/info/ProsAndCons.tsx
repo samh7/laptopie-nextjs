@@ -1,3 +1,4 @@
+"use client";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { Laptop } from "@/lib/interfaces/interfaces";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

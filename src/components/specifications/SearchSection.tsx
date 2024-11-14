@@ -1,3 +1,4 @@
+"use client";
 import { FaSearch } from "react-icons/fa";
 
 export default function SearchSection({

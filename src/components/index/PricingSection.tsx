@@ -1,3 +1,4 @@
+"use client";
 import { FiCheck } from "react-icons/fi";
 
 export default function PricingSection() {

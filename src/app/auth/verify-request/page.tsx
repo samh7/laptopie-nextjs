@@ -1,3 +1,4 @@
+"use client";
 export default function VerifyRequest() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">

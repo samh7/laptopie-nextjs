@@ -1,3 +1,4 @@
+"use client";
 import { Specification } from '@/lib/interfaces/interfaces';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';

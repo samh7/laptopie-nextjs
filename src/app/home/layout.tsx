@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { authOptions } from "@/lib/auth/auth";
 import { getServerSession } from "next-auth";
+import NextAuthProvider from "@/components/auth/NextAuthProvider";
 
 export const metadata: Metadata = {
   title: "Laptopie",
@@ -16,8 +17,9 @@ export default async function RootLayout({
 }>) {
   const session = await getServerSession(authOptions);
   return (
-    <div className="w-screen" >
-      <Header userLoggedIn={session ? true : false} />
+    <NextAuthProvider>
+      <div className="w-screen" >
+        <Header userLoggedIn={session ? true : false} />
 
       <main className="flex min-h-screen flex-col items-center justify-between">
         <div className="container">
@@ -26,5 +28,6 @@ export default async function RootLayout({
       </main>
       <Footer />
     </div>
+    </NextAuthProvider>
   );
 }

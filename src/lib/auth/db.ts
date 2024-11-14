@@ -11,10 +11,10 @@ if (process.env.NODE_ENV !== 'production') globalThis.prisma = prisma
 export async function checkDatabaseConnection() {
   try {
     await prisma.$connect()
-    console.log('✅ Database connection successful')
+    console.log('Database connection successful')
     return true
   } catch (error) {
-    console.error('❌ Database connection failed:', error)
+    console.error('Database connection failed:', error)
     return false
   }
 }

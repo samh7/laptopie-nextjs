@@ -1,3 +1,5 @@
+
+"use client";
 import { BiChip, BiExpandAlt } from "react-icons/bi";
 import { FaBatteryFull } from "react-icons/fa";
 import { Laptop } from "@/lib/interfaces/interfaces";

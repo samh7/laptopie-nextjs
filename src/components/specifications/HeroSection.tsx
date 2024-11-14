@@ -1,3 +1,4 @@
+"use client";
 import { Cpu, HardDrive, Monitor, Battery } from "lucide-react";
 
 export default function HeroSection() {

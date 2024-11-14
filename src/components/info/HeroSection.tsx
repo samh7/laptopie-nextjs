@@ -1,3 +1,5 @@
+"use client";
+
 import { Laptop } from "@/lib/interfaces/interfaces";
 import { Button } from "@/components/ui/button";
 import { Printer } from "lucide-react";
@@ -28,7 +30,7 @@ export default function HeroSection({
             </div>
             <div className="flex items-center gap-6">
               <span className="text-3xl font-bold">
-                ${reccomendedLaptop?.priceRange}
+                KSH.{reccomendedLaptop?.priceRange.toLocaleString()}
               </span>
               <Button 
                 variant="outline"

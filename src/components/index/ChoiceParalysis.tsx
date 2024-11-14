@@ -1,3 +1,4 @@
+"use client";
 export default function ChoiceParalysis() {
   return (
     <section className="py-16 sm:py-20 bg-blue-600 text-white">

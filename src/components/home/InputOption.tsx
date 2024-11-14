@@ -1,3 +1,4 @@
+// "use client";
 import { useRef } from "react";
 import QuizComponet from "./QuizComponet.jsx";
 import { QuizAnswers } from "@/lib/interfaces/interfaces";

@@ -1,3 +1,4 @@
+"use client";
 import { specsList } from "@/data/data";
 import { Laptop } from "@/lib/interfaces/interfaces";
 import { StarIcon } from "lucide-react";
@@ -36,10 +37,10 @@ export default function HeroSection({
               <div>
                 <div className="flex justify-between mb-2">
                   <span className="text-3xl font-bold">
-                    ${Math.min(...reccomendations.map((l) => l.priceRange))}
+                    KSH.{Math.min(...reccomendations.map((l) => l.priceRange)).toLocaleString()}
                   </span>
                   <span className="text-3xl font-bold">
-                    ${Math.max(...reccomendations.map((l) => l.priceRange))}
+                  KSH.{Math.max(...reccomendations.map((l) => l.priceRange)).toLocaleString()}
                   </span>
                 </div>
 

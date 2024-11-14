@@ -1,3 +1,4 @@
+"use client";
 import { FaArrowRight, FaCheckCircle, FaRegStar } from "react-icons/fa";
 import Link from "next/link";
 import { BiChip, BiCog, BiLaptop, BiMemoryCard } from "react-icons/bi";
@@ -63,7 +64,7 @@ export default function Results({
                           <div className="flex flex-col items-end">
                             <span className="text-sm text-muted-foreground">Starting at</span>
                             <span className="text-2xl font-bold text-primary">
-                              ${laptop.priceRange}
+                              KSH.{laptop.priceRange.toLocaleString()}
                             </span>
                           </div>
                         </div>

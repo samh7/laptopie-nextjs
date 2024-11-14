@@ -1,3 +1,4 @@
+"use client";
 import { FaShoppingCart } from "react-icons/fa";
 import { Laptop } from "@/lib/interfaces/interfaces";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";

@@ -1,3 +1,4 @@
+"use client";
 import { chatWithLaptop } from "@/lib/action";
 import { useState, useRef, useEffect } from "react";
 import { BiSend, BiMessageRoundedDots } from "react-icons/bi";

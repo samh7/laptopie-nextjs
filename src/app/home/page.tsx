@@ -59,14 +59,15 @@ export default function Home() {
         activeOption={activeOption}
         setActiveOption={setActiveOption}
       />
-
-      <InputOption
-        describe={describe}
-        submitName={submitName}
-        activeOption={activeOption}
-        getRecsName={setGetRecsName}
-        handleUserAnswer={handleUserAnswer}
-      />
+      <div className="mt-4">
+        <InputOption
+          describe={describe}
+          submitName={submitName}
+          activeOption={activeOption}
+          getRecsName={setGetRecsName}
+          handleUserAnswer={handleUserAnswer}
+        />
+      </div>
 
       {/* <LaptopHistory/> */}
       <PopularCategories />

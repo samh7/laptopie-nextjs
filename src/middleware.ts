@@ -56,7 +56,7 @@ export default withAuth(
 
 export const config = {
   matcher: [
-    // "/home/:path*",
+    "/home/:path*",
     "/api/laptops/:path*",
   ],
 };
