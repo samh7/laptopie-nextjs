@@ -1,5 +1,6 @@
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { Laptop } from "@/lib/interfaces/interfaces";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function ProsAndCons({
   reccomendedLaptop,
@@ -7,43 +8,50 @@ export default function ProsAndCons({
   reccomendedLaptop: Laptop;
 }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-xl mb-16">
-      <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
-        <div className="p-8">
-          <h3 className="text-xl font-semibold mb-6 text-[#107c10] flex items-center gap-2">
-            <FaCheckCircle />
+    <div className="grid md:grid-cols-2 gap-6 mb-16">
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-emerald-600">
+            <FaCheckCircle className="h-5 w-5" />
             Advantages
-          </h3>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           <ul className="space-y-3">
             {reccomendedLaptop?.pros?.map((pro: string, index: number) => (
               <li
                 key={index}
-                className="flex items-center gap-3 text-slate-600 hover:text-slate-900 transition-colors"
+                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
               >
-                <div className="w-1.5 h-1.5 rounded-full bg-[#107c10]" />
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                 {pro}
               </li>
             )) || []}
           </ul>
-        </div>
-        <div className="p-8">
-          <h3 className="text-xl font-semibold mb-6 text-[#d83b01] flex items-center gap-2">
-            <FaTimesCircle />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-destructive">
+            <FaTimesCircle className="h-5 w-5" />
             Limitations
-          </h3>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
           <ul className="space-y-3">
             {reccomendedLaptop?.cons?.map((con: string, index: number) => (
               <li
                 key={index}
-                className="flex items-center gap-3 text-slate-600 hover:text-slate-900 transition-colors"
+                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
               >
-                <div className="w-1.5 h-1.5 rounded-full bg-[#d83b01]" />
+                <div className="w-1.5 h-1.5 rounded-full bg-destructive" />
                 {con}
               </li>
             )) || []}
           </ul>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

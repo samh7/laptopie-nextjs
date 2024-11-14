@@ -1,45 +1,55 @@
+import { Card, CardContent } from "@/components/ui/card"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { QuoteIcon } from "lucide-react"
 
 export default function Testimonials() {
   return (
-    <section className="py-16 sm:py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
+    <section className="container space-y-8 py-16 md:py-20">
+      <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
+        <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
           What Our Users Say
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {[
-            {
-              name: "Brad Justin",
-              role: "Software Developer",
-              text: "I highly recommend Laptopie. As a developer, I was having challenges choosing between laptop specifications but Laptopie helped me.",
-            },
-            {
-              name: "Edith Cooper",
-              role: "Video Editor",
-              text: "The recommendations are so accurate. I have been using the laptop for my video editing tasks for about 3 years now and it's still a beast. Laptopie is the best.",
-            },
-          ].map((testimonial) => (
-            <div
-              key={testimonial.name}
-              className="p-8 bg-white rounded-xl border border-gray-100"
-            >
-              <div className="text-4xl text-blue-600 mb-4">"</div>
-              <p className="text-gray-600 mb-6 italic">{testimonial.text}</p>
+        <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+          Discover how Laptopie has helped others find their perfect laptop
+        </p>
+      </div>
+
+      <div className="mx-auto grid gap-4 sm:grid-cols-2 md:max-w-[64rem]">
+        {[
+          {
+            name: "Brad Justin",
+            role: "Software Developer",
+            text: "I highly recommend Laptopie. As a developer, I was having challenges choosing between laptop specifications but Laptopie helped me.",
+          },
+          {
+            name: "Edith Cooper",
+            role: "Video Editor",
+            text: "The recommendations are so accurate. I have been using the laptop for my video editing tasks for about 3 years now and it's still a beast. Laptopie is the best.",
+          },
+        ].map((testimonial) => (
+          <Card key={testimonial.name} className="flex flex-col">
+            <CardContent className="grid gap-4 p-6">
+              <QuoteIcon className="h-5 w-5 text-muted-foreground" />
+              <p className="text-sm leading-normal">{testimonial.text}</p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-blue-600 font-semibold">
+                <Avatar>
+                  <AvatarFallback className="bg-muted">
                     {testimonial.name.charAt(0)}
-                  </span>
-                </div>
-                <div>
-                  <h4 className="font-semibold">{testimonial.name}</h4>
-                  <p className="text-gray-600">{testimonial.role}</p>
+                  </AvatarFallback>
+                </Avatar>
+                <div className="grid gap-1">
+                  <p className="text-sm font-medium leading-none">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {testimonial.role}
+                  </p>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </section>
-  );
+  )
 }

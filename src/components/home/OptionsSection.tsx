@@ -1,35 +1,81 @@
-import { OptionCard } from "./OptionCard";
-import { BiCheckCircle } from "react-icons/bi";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { MessageSquare, ListChecks } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-interface OptionsSectionsProps {
-  activeOption: string;
-  setActiveOption: (option: string) => void;
+interface OptionsSectionProps {
+  activeOption: any| null;
+  setActiveOption: any | null;
 }
 
-export default function OptionsSection({
-  activeOption,
-  setActiveOption,
-}: OptionsSectionsProps) {
+export default function OptionsSection({ activeOption, setActiveOption }: OptionsSectionProps) {
   return (
-    <div className="max-w-7xl mx-auto px-4 -mt-8">
-      <div className="flex flex-wrap justify-center gap-6">
-        <OptionCard
-          isSelected={activeOption === "quiz"}
-          onClick={() => setActiveOption("quiz")}
-          icon={<BiCheckCircle className="text-2xl text-[#0067b8]" />}
-          title="Answer Questions"
-          description="Get recommendations by answering a few simple questions about your needs, budget, and preferences."
-          tags={["5-10 minutes", "Structured", "Detailed results"]}
-        />
+    <div className="relative bg-white border-b">
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col items-center space-y-8">
+          {/* Section Title */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center space-y-3"
+          >
+            <h2 className="text-3xl font-semibold">Choose Your Path</h2>
+            <p className="text-muted-foreground max-w-2xl">
+              Get personalized laptop recommendations by either answering a few questions or describing your ideal laptop
+            </p>
+          </motion.div>
 
-        <OptionCard
-          isSelected={activeOption === "describe"}
-          onClick={() => setActiveOption("describe")}
-          icon={<BiCheckCircle className="text-2xl text-[#0067b8]" />}
-          title="Describe Your Needs"
-          description="Tell us in your own words what you're looking for in a laptop. Our AI will analyze your description."
-          tags={["2-3 minutes", "Free form", "Natural language"]}
-        />
+          {/* Options Grid */}
+          <div className="grid md:grid-cols-2 gap-6 w-full max-w-4xl">
+            {/* Quiz Option */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <Button
+                variant="outline"
+                className={cn(
+                  "w-full h-auto p-6 flex flex-col items-center gap-4 hover:bg-blue-50 hover:border-blue-200 transition-all",
+                  activeOption === "quiz" && "bg-blue-50 border-blue-200"
+                )}
+                onClick={() => setActiveOption("quiz")}
+              >
+                <ListChecks className="h-12 w-12 text-blue-500" />
+                <div className="space-y-2 text-center">
+                  <h3 className="font-semibold text-xl">Answer Questions</h3>
+                  <p className="text-muted-foreground text-sm">
+                    Get recommendations by answering a few simple questions about your needs
+                  </p>
+                </div>
+              </Button>
+            </motion.div>
+
+            {/* Describe Option */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <Button
+                variant="outline"
+                className={cn(
+                  "w-full h-auto p-6 flex flex-col items-center gap-4 hover:bg-purple-50 hover:border-purple-200 transition-all",
+                  activeOption === "describe" && "bg-purple-50 border-purple-200"
+                )}
+                onClick={() => setActiveOption("describe")}
+              >
+                <MessageSquare className="h-12 w-12 text-purple-500" />
+                <div className="space-y-2 text-center">
+                  <h3 className="font-semibold text-xl">Describe Your Needs</h3>
+                  <p className="text-muted-foreground text-sm">
+                    Tell us about your ideal laptop in your own words
+                  </p>
+                </div>
+              </Button>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </div>
   );

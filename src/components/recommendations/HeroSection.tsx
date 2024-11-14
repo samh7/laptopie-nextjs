@@ -1,6 +1,9 @@
 import { specsList } from "@/data/data";
 import { Laptop } from "@/lib/interfaces/interfaces";
-import { FaRegStar } from "react-icons/fa";
+import { StarIcon } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 
 export default function HeroSection({
   reccomendations,
@@ -8,31 +11,30 @@ export default function HeroSection({
   reccomendations: Laptop[];
 }) {
   return (
-    <div className="bg-gradient-to-r from-[#0067b8] to-[#2b5797] text-white">
-      <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="bg-gradient-to-b from-background to-muted">
+      <div className="container px-4 py-16 space-y-8">
         {/* Title Section */}
-        <div className="mb-12">
-          <div className="inline-flex items-center gap-3 bg-white/10 px-4 py-2 rounded-full mb-6">
-            <FaRegStar className="text-yellow-300" />
-            <span className="text-sm font-medium">
-              {reccomendations.length} Perfect Matches Found
-            </span>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+        <div className="space-y-4">
+          <Badge variant="secondary" className="h-8">
+            <StarIcon className="mr-2 h-4 w-4 text-yellow-500" />
+            {reccomendations.length} Perfect Matches Found
+          </Badge>
+          <h1 className="text-4xl font-bold tracking-tight lg:text-6xl">
             Your Ideal Laptops
             <br />
-            <span className="text-blue-200">Handpicked Just For You</span>
+            <span className="text-muted-foreground">Handpicked Just For You</span>
           </h1>
         </div>
 
-        {/* Price Range$ & Description */}
-
-        <div className="grid md:grid-cols-12 gap-8">
-          <div className="md:col-span-4 bg-white/5 rounded-2xl p-6">
-            <h3 className="text-lg font-medium mb-6">Investment Range</h3>
-            <div className="space-y-6">
-              <div className="relative">
-                <div className="flex justify-between items-center mb-2">
+        <div className="grid gap-6 lg:grid-cols-12">
+          {/* Price Range Card */}
+          <Card className="lg:col-span-4">
+            <CardHeader>
+              <CardTitle>Investment Range</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div>
+                <div className="flex justify-between mb-2">
                   <span className="text-3xl font-bold">
                     ${Math.min(...reccomendations.map((l) => l.priceRange))}
                   </span>
@@ -42,61 +44,58 @@ export default function HeroSection({
                 </div>
 
                 <div className="relative mt-4">
-                  <div className="h-1.5 bg-white/20 rounded-full">
-                    <div className="absolute inset-0 bg-blue-400/50 rounded-full"></div>
+                  <div className="h-2 bg-secondary rounded-full">
+                    <div className="absolute inset-0 bg-primary/50 rounded-full" />
                   </div>
-                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full"></div>
+                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-primary rounded-full" />
                 </div>
 
                 <div className="flex justify-between mt-2">
-                  <span className="text-sm text-blue-200">Entry Level</span>
-                  <span className="text-sm text-blue-200">Premium</span>
+                  <span className="text-sm text-muted-foreground">Entry Level</span>
+                  <span className="text-sm text-muted-foreground">Premium</span>
                 </div>
               </div>
 
-              <p className="text-sm text-blue-100 border-t border-white/10 pt-4">
+              <Separator />
+              
+              <p className="text-sm text-muted-foreground">
                 Range includes options balancing performance with value. Higher
-                prices typically indicate premium features and better
-                performance.
+                prices typically indicate premium features and better performance.
               </p>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
-          {/* Laptop  Specs */}
-          <div className="md:col-span-8">
+          {/* Specs Grid */}
+          <div className="lg:col-span-8 space-y-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {specsList.map((item, index) => (
-                <div
-                  key={index}
-                  className={`${item.bg} rounded-xl p-4 backdrop-blur-sm border border-white/5`}
-                >
-                  <div className="bg-white/10 w-10 h-10 rounded-lg flex items-center justify-center mb-3">
-                    {item.icon}
-                  </div>
-                  <h3 className="font-medium">{item.title}</h3>
-                  <p className="text-sm text-blue-200">{item.desc}</p>
-                </div>
+                <Card key={index} className="border-none shadow-none bg-card/50">
+                  <CardContent className="p-4">
+                    <div className="bg-secondary/50 w-10 h-10 rounded-lg flex items-center justify-center mb-3">
+                      {item.icon}
+                    </div>
+                    <h3 className="font-medium mb-1">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                  </CardContent>
+                </Card>
               ))}
             </div>
 
-            <div className="mt-6 flex items-center gap-4 bg-white/5 p-6 rounded-xl border border-white/10">
-              <div className="flex-shrink-0">
-                <FaRegStar className="text-yellow-300 text-xl" />
-              </div>
-              <div className="space-y-2">
-                <p className="text-blue-100 font-medium">
-                  Recommendations are ordered by match quality, with best
-                  matches first
-                </p>
-                <p className="text-sm text-blue-200">
-                  Each laptop is scored based on how well it matches your
-                  requirements for performance, budget, and features. The first
-                  recommendations will most closely align with your needs, while
-                  later options may offer alternative trade-offs or premium
-                  features.
-                </p>
-              </div>
-            </div>
+            <Card className="border-none shadow-none bg-card/50">
+              <CardContent className="flex items-center gap-4 p-6">
+                <StarIcon className="h-5 w-5 text-yellow-500 flex-shrink-0" />
+                <div className="space-y-1">
+                  <p className="font-medium">
+                    Recommendations are ordered by match quality, with best matches first
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Each laptop is scored based on how well it matches your
+                    requirements for performance, budget, and features. The first
+                    recommendations will most closely align with your needs.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

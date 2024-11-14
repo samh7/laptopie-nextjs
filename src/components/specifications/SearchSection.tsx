@@ -8,20 +8,20 @@ export default function SearchSection({
   setSearchTerm: (searchTerm: string) => void;
 }) {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <div className="max-w-4xl mx-auto mb-12">
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Search specifications..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-6 py-4 bg-white border-2 border-slate-200 rounded-full 
-            focus:outline-none focus:ring-2 focus:ring-[#0067b8] focus:border-[#0067b8] 
-            text-gray-900 placeholder-gray-500 text-lg"
-          />
-          <FaSearch className="absolute right-6 top-1/2 transform -translate-y-1/2 text-[#0067b8] text-xl" />
-        </div>
+    <div className="container mx-auto px-4 py-8">
+      <div className="relative max-w-2xl mx-auto">
+        <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+        <input
+          type="text"
+          placeholder="Search specifications..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="flex h-12 w-full rounded-lg border border-input bg-background px-10 py-2 text-base ring-offset-background 
+          file:border-0 file:bg-transparent file:text-sm file:font-medium 
+          placeholder:text-muted-foreground 
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+          disabled:cursor-not-allowed disabled:opacity-50"
+        />
       </div>
     </div>
   );

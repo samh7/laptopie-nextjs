@@ -1,5 +1,7 @@
 import { FaShoppingCart } from "react-icons/fa";
 import { Laptop } from "@/lib/interfaces/interfaces";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export default function ShoppingLinks({
   reccomendedLaptop,
@@ -7,36 +9,36 @@ export default function ShoppingLinks({
   reccomendedLaptop: Laptop;
 }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
-      <div className="border-b border-slate-200 bg-slate-50 p-6">
+    <Card>
+      <CardHeader className="bg-muted/50 border-b">
         <div className="flex items-center justify-between">
           <h3 className="text-xl font-semibold">Purchase Options</h3>
-          <span className="text-sm text-slate-500">
+          <span className="text-sm text-muted-foreground">
             Best prices from trusted retailers
           </span>
         </div>
-      </div>
+      </CardHeader>
 
-      <div className="divide-y divide-slate-100">
-        {reccomendedLaptop?.shoppingLinks?.map(
-          (link: string, index: number) => (
+      <CardContent className="p-0">
+        <div className="divide-y">
+          {reccomendedLaptop?.shoppingLinks?.map((link: string, index: number) => (
             <a
               key={index}
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              className="block p-6 hover:bg-slate-50 transition-colors group"
+              className="block p-6 hover:bg-muted/50 transition-colors group"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 bg-[#0067b8]/5 rounded-lg flex items-center justify-center group-hover:bg-[#0067b8]/10 transition-colors">
-                    <FaShoppingCart className="text-[#0067b8] text-xl" />
+                  <div className="w-12 h-12 bg-primary/5 rounded-lg flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                    <FaShoppingCart className="text-primary text-xl" />
                   </div>
                   <div>
-                    <div className="text-lg font-medium text-slate-900 mb-1">
+                    <div className="text-lg font-medium mb-1">
                       Retailer {index + 1}
                     </div>
-                    <div className="text-sm text-slate-500">
+                    <div className="text-sm text-muted-foreground">
                       {link.includes("amazon")
                         ? "Amazon.com"
                         : link.includes("smartprix")
@@ -47,22 +49,24 @@ export default function ShoppingLinks({
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="px-3 py-1 rounded-full bg-green-50 text-green-700 text-sm font-medium">
+                  <Badge variant="secondary" className="bg-emerald-500/15 text-emerald-600 hover:bg-emerald-500/20">
                     In Stock
-                  </div>
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 group-hover:bg-[#0067b8] group-hover:text-white transition-colors">
+                  </Badge>
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center bg-muted group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                     →
                   </div>
                 </div>
               </div>
             </a>
-          )
-        ) || []}
-      </div>
+          )) || []}
+        </div>
+      </CardContent>
 
-      <div className="bg-slate-50 p-4 text-center text-sm text-slate-500">
-        Prices and availability may vary by region
-      </div>
-    </div>
+      <CardFooter className="bg-muted/50 justify-center py-4">
+        <p className="text-sm text-muted-foreground">
+          Prices and availability may vary by region
+        </p>
+      </CardFooter>
+    </Card>
   );
 }

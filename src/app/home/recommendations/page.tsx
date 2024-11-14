@@ -29,7 +29,7 @@ export default function Recommendations() {
   }, [reccomendations]);
 
   return (
-    <div className="min-h-screen bg-[#fafafa]">
+    <div className="min-h-screen ">
       <HeroSection reccomendations={reccomendations} />
       <Results reccomendations={reccomendations} laptopImages={laptopImages} />
     </div>

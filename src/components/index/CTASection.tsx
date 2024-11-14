@@ -1,14 +1,21 @@
+import { Button } from "@/components/ui/button";
 
 export default function CTASection() {
   return (
-    <section className="py-16 sm:py-20 bg-blue-600 text-white">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8">
-          Get a Laptop Today...
+    <section className="border-t w-screen flex flex-col items-center bg-gray-900">
+      <div className="container flex flex-col items-center gap-4 py-20 text-center">
+        <h2 className="text-3xl font-bold leading-tight tracking-tighter md:text-4xl text-white">
+          Ready to Find Your Perfect Laptop?
         </h2>
-        <button className="px-6 sm:px-8 py-3 sm:py-4 bg-white text-blue-600 rounded-full text-lg hover:bg-gray-100 transition-colors">
-          Get Started
-        </button>
+        <p className="max-w-[700px] text-gray-400">
+          Get personalized recommendations based on your needs and budget.
+        </p>
+        <div className="flex gap-4">
+          <Button
+          size="lg" className="bg-white hover:bg-white/80 text-gray-900">
+            Get Started
+          </Button>
+        </div>
       </div>
     </section>
   );

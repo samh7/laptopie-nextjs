@@ -26,14 +26,14 @@ export default function LaptopInfo() {
 
   if (!reccomendedLaptop) {
     return (
-      <div className="min-h-screen bg-[#fafafa] flex items-center justify-center">
+      <div className="min-h-screen  flex items-center justify-center">
         <div className="text-xl">Laptop not found</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#fafafa] text-slate-800 relative">
+    <div className="min-h-screen  text-slate-800 relative">
       <HeroSection reccomendedLaptop={reccomendedLaptop} image={image} />
       <KeyFeatures reccomendedLaptop={reccomendedLaptop} />
       <DetailedSpecs reccomendedLaptop={reccomendedLaptop} />

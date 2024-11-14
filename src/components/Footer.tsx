@@ -1,26 +1,70 @@
+import Link from "next/link"
+
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <h3 className="text-xl font-bold mb-4">Laptopie</h3>
-            <p className="text-gray-400">Your AI-powered laptop recommendation system</p>
+    <footer className="w-screen border-t px-10 bg-background">
+      <div className="container flex flex-col gap-4 py-10 md:flex-row md:gap-8">
+        <div className="flex flex-col gap-4 md:w-1/3">
+          <div className="text-lg font-semibold">Laptopie</div>
+          <p className="text-sm text-muted-foreground">
+            Your AI-powered laptop recommendation system. Find the perfect laptop for your needs.
+          </p>
+        </div>
+        <div className="flex-1 grid grid-cols-2 gap-8 sm:grid-cols-3">
+          <div className="space-y-3">
+            <h4 className="text-sm font-medium">Resources</h4>
+            <ul className="space-y-2.5">
+              <li>
+                <Link href="/home/specifications" className="text-sm text-muted-foreground hover:text-primary">
+                  Specifications
+                </Link>
+              </li>
+              <li>
+                <Link href="/quiz" className="text-sm text-muted-foreground hover:text-primary">
+                  Laptop Quiz
+                </Link>
+              </li>
+            </ul>
           </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li><a href="/about" className="text-gray-400 hover:text-white">About</a></li>
-              <li><a href="/blog" className="text-gray-400 hover:text-white">Blog</a></li>
-              <li><a href="/pricing" className="text-gray-400 hover:text-white">Pricing</a></li>
-              <li><a href="/contact" className="text-gray-400 hover:text-white">Contact</a></li>
+          <div className="space-y-3">
+            <h4 className="text-sm font-medium">Company</h4>
+            <ul className="space-y-2.5">
+              <li>
+                <Link href="/about" className="text-sm text-muted-foreground hover:text-primary">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm text-muted-foreground hover:text-primary">
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className="space-y-3">
+            <h4 className="text-sm font-medium">Legal</h4>
+            <ul className="space-y-2.5">
+              <li>
+                <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary">
+                  Privacy
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary">
+                  Terms
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          © 2024 Laptopie. All rights reserved.
+      </div>
+      <div className="border-t">
+        <div className="container flex h-14 items-center justify-between">
+          <p className="text-sm text-muted-foreground">
+            © 2024 Laptopie. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
-  );
+  )
 } 

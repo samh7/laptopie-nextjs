@@ -48,7 +48,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fafafa] ">
+    <div className="min-h-screen">
       <HeroSection
         title="Find Your Perfect Laptop"
         description="Get personalized laptop recommendations based on your needs. Choose how you'd like to proceed:"
@@ -67,6 +67,8 @@ export default function Home() {
         getRecsName={setGetRecsName}
         handleUserAnswer={handleUserAnswer}
       />
+
+      {/* <LaptopHistory/> */}
       <PopularCategories />
       <SpecGuide />
       <DetailedSpecs />

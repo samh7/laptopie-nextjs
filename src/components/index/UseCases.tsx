@@ -1,25 +1,102 @@
-import { useCases } from "@/data/data";
+"use client"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useCases } from "@/data/data"
+import { useEffect, useRef } from "react"
 
 export default function UseCases() {
+  const firstRow = useCases.slice(0, Math.ceil(useCases.length / 2))
+  const secondRow = useCases.slice(Math.ceil(useCases.length / 2))
+  
+  const firstRowRef = useRef<HTMLDivElement>(null)
+  const secondRowRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (firstRowRef.current) {
+      const scrollWidth = firstRowRef.current.scrollWidth
+      firstRowRef.current.scrollLeft = 0
+    }
+    if (secondRowRef.current) {
+      const scrollWidth = secondRowRef.current.scrollWidth
+      secondRowRef.current.scrollLeft = (scrollWidth - 10)
+    }
+  }, [])
+
   return (
-    <section className="py-16 sm:py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
-          Find Your Perfect Laptop
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {useCases.map(({ icon: Icon, title, description }) => (
-            <div
-              key={title}
-              className="p-6 bg-white rounded-xl border border-gray-100 hover:border-blue-500 transition-all"
-            >
-              <Icon className="w-8 h-8 text-blue-600 mb-4" />
-              <h3 className="text-xl font-semibold mb-2">{title}</h3>
-              <p className="text-gray-600">{description}</p>
+    <section className="py-16 sm:py-20 bg-background overflow-hidden w-full">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center justify-center text-center">
+          <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl mb-6">
+            Find Your Perfect Laptop
+          </h2>
+          
+          {/* Show grid on large screens */}
+          <div className="hidden lg:flex lg:flex-wrap lg:justify-center lg:gap-6 w-full">
+            {useCases.map(({ icon: Icon, title, description }) => (
+              <Card 
+                key={title} 
+                className="border-primary transition-colors flex-[1_1_300px] max-w-[400px]"
+              >
+                <CardHeader>
+                  <Icon className="w-8 h-8 text-primary mb-4" />
+                  <CardTitle className="text-xl">{title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">{description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Scrolling rows for small screens */}
+          <div className="lg:hidden w-full max-w-[100vw]">
+            {/* First Row */}
+            <div className="mb-6 overflow-hidden w-full">
+              <div 
+                ref={firstRowRef}
+                className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth w-full"
+              >
+                {[...firstRow, ...firstRow, ...firstRow].map(({ icon: Icon, title, description }, index) => (
+                  <Card 
+                    key={`${title}-${index}`}
+                    className="border-primary transition-colors flex-none w-[300px] mx-3 snap-center"
+                  >
+                    <CardHeader>
+                      <Icon className="w-8 h-8 text-primary mb-4" />
+                      <CardTitle className="text-xl">{title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">{description}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
-          ))}
+
+            {/* Second Row */}
+            <div className="overflow-hidden w-full">
+              <div 
+                ref={secondRowRef}
+                className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth w-full"
+              >
+                {[...secondRow, ...secondRow, ...secondRow].map(({ icon: Icon, title, description }, index) => (
+                  <Card 
+                    key={`${title}-${index}`}
+                    className="border-primary transition-colors flex-none w-[300px] mx-3 snap-center"
+                  >
+                    <CardHeader>
+                      <Icon className="w-8 h-8 text-primary mb-4" />
+                      <CardTitle className="text-xl">{title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">{description}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-  );
+  )
 }

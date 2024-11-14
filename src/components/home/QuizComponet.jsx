@@ -16,6 +16,11 @@ import {
   BiWindowAlt,
   BiLoaderCircle,
 } from "react-icons/bi";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const questions = [
   {
@@ -279,133 +284,131 @@ export default function QuizComponet({ onQuizComplete, getRecsName }) {
   };
 
   const question = questions[currentQuestion];
+  const progress = ((currentQuestion + 1) / questions.length) * 100;
 
   return (
-    <div className="w-full">
-      {/* Progress Bar */}
-      <div className="mb-8">
-        <div className="flex justify-between mb-2">
-          <span className="text-sm font-medium text-[#0067b8]">
+    <div className="w-full max-w-4xl mx-auto p-4 space-y-8">
+      {/* Progress Section */}
+      <div className="space-y-2">
+        <div className="flex justify-between text-sm">
+          <span className="text-primary font-medium">
             Question {currentQuestion + 1} of {questions.length}
           </span>
-          <span className="text-sm font-medium text-gray-500">
-            {Math.round(((currentQuestion + 1) / questions.length) * 100)}%
-            Complete
+          <span className="text-muted-foreground">
+            {Math.round(progress)}% Complete
           </span>
         </div>
-        <div className="w-full bg-gray-100 rounded-full h-2">
-          <div
-            className="bg-[#0067b8] h-2 rounded-full transition-all duration-300"
-            style={{
-              width: `${((currentQuestion + 1) / questions.length) * 100}%`,
-            }}
-          ></div>
-        </div>
+        <Progress value={progress} className="h-2" />
       </div>
 
       {/* Question Section */}
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">
-            <BiLaptop className="text-2xl text-[#0067b8]" />
+      <div className="space-y-6">
+        <div className="flex items-center gap-3">
+          <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+            <BiLaptop className="h-6 w-6 text-primary" />
           </div>
-          <h3 className="text-xl font-semibold text-gray-800">
+          <h3 className="text-2xl font-semibold tracking-tight">
             {question.question}
           </h3>
         </div>
-      </div>
 
-      {/* Options Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {question.options.map((option, index) => {
-          const isSelected = isOptionSelected(option);
-          const isDisabled = !isSelected && isMaxSelectionsReached();
+        {/* Options Grid */}
+        <div className={cn(
+          "grid gap-4",
+          // Adjust grid columns based on number of options
+          question.options.length <= 2 ? "grid-cols-1" : 
+          question.options.length <= 4 ? "grid-cols-1 md:grid-cols-2" :
+          "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
+          // Add max-width constraints based on number of options
+          question.options.length <= 2 ? "max-w-2xl mx-auto" :
+          "w-full"
+        )}>
+          {question.options.map((option, index) => {
+            const isSelected = isOptionSelected(option);
+            const isDisabled = !isSelected && isMaxSelectionsReached();
 
-          return (
-            <button
-              key={index}
-              onClick={() => handleAnswer(option)}
-              disabled={isDisabled}
-              className={`p-4 text-left border rounded-lg transition-all duration-200 group relative
-                ${
-                  isSelected
-                    ? "border-[#0067b8] bg-blue-50"
-                    : isDisabled
-                    ? "border-gray-200 bg-gray-50 cursor-not-allowed opacity-60"
-                    : "border-gray-200 hover:border-[#0067b8] hover:bg-blue-50"
-                }`}
-            >
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center
-                  ${
-                    isSelected
-                      ? "bg-[#0067b8] text-white"
-                      : "bg-gray-100 text-gray-500 group-hover:text-[#0067b8] group-hover:bg-blue-100"
-                  }`}
-                >
-                  {getOptionIcon(option.title)}
-                </div>
-                <div className="flex flex-col">
-                  <span
-                    className={`font-medium ${
-                      isSelected ? "text-[#0067b8]" : "text-gray-700"
-                    }`}
-                  >
-                    {option.title}
-                  </span>
-                  {option.description && (
-                    <span className="text-sm text-gray-500">
-                      {option.description}
-                    </span>
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Card
+                  className={cn(
+                    "cursor-pointer transition-all hover:shadow-md h-full", // Added h-full
+                    isSelected && "border-primary ring-2 ring-primary/20",
+                    isDisabled && "opacity-50 cursor-not-allowed"
                   )}
-                </div>
-              </div>
-            </button>
-          );
-        })}
+                  onClick={() => !isDisabled && handleAnswer(option)}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <div className={cn(
+                        "w-10 h-10 rounded-full flex items-center justify-center shrink-0",
+                        isSelected ? "bg-primary text-primary-foreground" : "bg-muted"
+                      )}>
+                        {getOptionIcon(option.title)}
+                      </div>
+                      <div className="space-y-1">
+                        <h4 className={cn(
+                          "font-medium",
+                          isSelected && "text-primary"
+                        )}>
+                          {option.title}
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          {option.description}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Navigation Buttons */}
-      <div className="mt-8 flex justify-between">
+      <div className="flex justify-between pt-6">
         {currentQuestion > 0 && (
-          <button
+          <Button
+            variant="outline"
             onClick={goToPreviousQuestion}
-            className="flex items-center gap-2 px-6 py-2 text-[#0067b8] border border-[#0067b8] rounded-full 
-                     hover:bg-blue-50 transition-colors duration-300"
+            className="flex items-center gap-2"
           >
-            <BiLeftArrowAlt className="text-xl" />
+            <BiLeftArrowAlt className="h-4 w-4" />
             Previous
-          </button>
+          </Button>
         )}
 
-        {answers[question.id]?.length > 0 &&
-          currentQuestion < questions.length - 1 && (
-            <button
+        <div className="ml-auto flex gap-2">
+          {answers[question.id]?.length > 0 && currentQuestion < questions.length - 1 && (
+            <Button
               onClick={goToNextQuestion}
-              className="flex items-center gap-2 px-6 py-2 bg-[#0067b8] text-white rounded-full 
-                     hover:bg-blue-700 transition-colors duration-300"
+              className="flex items-center gap-2"
             >
               Next
-              <BiRightArrowAlt className="text-xl" />
-            </button>
+              <BiRightArrowAlt className="h-4 w-4" />
+            </Button>
           )}
 
-        {currentQuestion === questions.length - 1 &&
-          answers[question.id]?.length > 0 && (
-            <button
+          {currentQuestion === questions.length - 1 && answers[question.id]?.length > 0 && (
+            <Button
               onClick={() => onQuizComplete(answers)}
-              className="flex items-center justify-center w-[250px] gap-2 px-6 py-2 bg-[#0067b8] text-white rounded-full 
-              hover:bg-blue-700 transition-colors duration-300"
+              className="flex items-center gap-2 min-w-[200px] justify-center"
             >
-              {getRecsName}
-              {getRecsName === "" ? (
-                <BiLoaderCircle className="text-xl animate-spin" />
-              ) : (
-                <BiRightArrowAlt className="text-xl" />
+              {getRecsName || (
+                <>
+                  <BiLoaderCircle className="h-4 w-4 animate-spin" />
+                  Getting Recommendations...
+                </>
               )}
-            </button>
+              {getRecsName && <BiRightArrowAlt className="h-4 w-4" />}
+            </Button>
           )}
+        </div>
       </div>
     </div>
   );

@@ -9,70 +9,85 @@ export default function SpesList({filteredSpecs}: {filteredSpecs: Specification[
   
     const toggleInfo = (index: number) => {
         setActiveInfo(activeInfo === index ? null : index);
-      };
+    };
+    
+    if (filteredSpecs.length === 0) {
+        return (
+            <div className="w-full max-w-4xl mx-auto text-center py-12 min-h-[70vh] flex flex-col items-center justify-start">
+                <h3 className="text-lg font-semibold text-muted-foreground">
+                    No specifications found
+                </h3>
+                <p className="text-base text-muted-foreground mt-2">
+                    Try adjusting your search terms or filters
+                </p>
+            </div>
+        );
+    }
     
     return (
-    <div className="space-y-8">
-        {filteredSpecs.map((spec, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-xl p-6 border border-slate-200"
-          >
-            <div className="flex items-center mb-2">
-              <h3 className="text-2xl font-semibold text-gray-900">
-                {spec.title}
-              </h3>
-              <button
-                type="button"
-                className="ml-2 text-[#0067b8] hover:text-[#005499] focus:outline-none transition-colors duration-300"
-                onClick={() => toggleInfo(index)}
+        <div className="w-full  max-w-6xl mx-auto space-y-3 min-h-[70vh]">
+            {filteredSpecs.map((spec, index) => (
+              <div
+                key={index}
+                className="border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
               >
-                <IoIosArrowDown
-                  className={`w-5 h-5 transform transition-transform duration-300 
-                      ${activeInfo === index ? "rotate-180" : ""}`}
-                />
-              </button>
-            </div>
-            <p className="text-slate-600 mb-2">{spec.description}</p>
-            <AnimatePresence>
-              {activeInfo === index && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
+                <div 
+                  className="flex flex-col"
+                  onClick={() => toggleInfo(index)}
                 >
-                  <div className="mt-4 p-6 bg-slate-50 rounded-xl border border-slate-200">
-                    <p className="text-slate-800 mb-4">
-                      {spec.detailedExplanation}
-                    </p>
-                    <div className="bg-white border-l-4 border-[#0067b8] p-4 mb-4 rounded">
-                      <p className="font-semibold mb-2">Recommendation:</p>
-                      <p className="text-slate-800">{spec.recommendation}</p>
-                    </div>
-                    <h4 className="font-semibold mb-2">Learn More:</h4>
-                    <ul className="space-y-2">
-                      {spec.externalLinks.map((link, linkIndex) => (
-                        <li key={linkIndex}>
-                          <a
-                            href={link.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[#0067b8] hover:text-[#005499] hover:underline flex items-center"
-                          >
-                            {link.text}
-                            <FaExternalLinkAlt className="ml-2 text-sm" />
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="px-6 py-4 flex items-center justify-between cursor-pointer">
+                    <h3 className="text-lg font-semibold">
+                      {spec.title}
+                    </h3>
+                    <IoIosArrowDown
+                      className={`h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-200 
+                          ${activeInfo === index ? "rotate-180" : ""}`}
+                    />
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  <div className="px-6 pb-4">
+                    <p className="text-base text-muted-foreground">{spec.description}</p>
+                  </div>
+                  <AnimatePresence>
+                    {activeInfo === index && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="px-6 pb-6">
+                          <div className="text-base text-muted-foreground mb-6">
+                            {spec.detailedExplanation}
+                          </div>
+                          <div className="bg-muted rounded-md p-6 mb-6">
+                            <div className="font-semibold text-base mb-2">Recommendation</div>
+                            <div className="text-base text-muted-foreground">{spec.recommendation}</div>
+                          </div>
+                          <div className="space-y-3">
+                            <h4 className="text-base font-semibold">Learn More</h4>
+                            <ul className="space-y-3">
+                              {spec.externalLinks.map((link, linkIndex) => (
+                                <li key={linkIndex}>
+                                  <a
+                                    href={link.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-base text-muted-foreground hover:text-primary inline-flex items-center"
+                                  >
+                                    {link.text}
+                                    <FaExternalLinkAlt className="ml-2 h-3.5 w-3.5" />
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-   
-  )
+    )
 }

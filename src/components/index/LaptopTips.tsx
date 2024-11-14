@@ -4,7 +4,7 @@ export default function LaptopTips() {
   return (
     <section className="py-16 sm:py-20 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
+        <h2 className="font-heading text-3xl flex justify-center leading-[1.1] sm:text-3xl md:text-6xl mb-6">
           Essential Laptop Tips
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
