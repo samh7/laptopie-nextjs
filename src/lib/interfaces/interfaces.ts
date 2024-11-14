@@ -58,16 +58,6 @@ export interface LaptopSpecs {
   battery: number;
   weight?: string;
 }
-export interface Laptop {
-  name: string;
-  imageUrl: string;
-  priceRange: number;
-  specs: LaptopSpecs;
-  pros: string[];
-  cons: string[];
-  shoppingLinks: string[];
-  summary: string;
-}
 
 export interface Recommnedation {
   recommendations: Laptop[];
@@ -95,4 +85,27 @@ export interface QuizState {
     storage: string;
     priority: string;
   };
+}
+
+export interface Laptop {
+  name: string;
+  imageUrl: string;
+  priceRange: number;
+  specs: LaptopSpecs;
+  pros: string[];
+  cons: string[];
+  shoppingLinks: string[];
+  summary: string;
+}
+
+
+export interface SavedLaptop extends Laptop {
+  id: string;
+  brand: string;
+  brandImage: string;
+  userId: string;
+  price: string;
+  chatMessages?: ChatMessage[];
+  createdAt: Date;
+  updatedAt: Date;
 }

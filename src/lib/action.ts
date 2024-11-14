@@ -62,3 +62,16 @@ export async function getRecommendationsFree(data: string) {
   const responseData = await res.json();
   return responseData;
 }
+
+
+export async function getLaptopHistory(userId: string) {
+  "use server";
+
+  const response = await fetch(
+    `${process.env.LAPTOPIE_URL}/api/laptops/history?userId=6733d62703a6925c17c24c13`
+  );
+
+  const data = await response.json()
+  console.log(data);
+  return response;
+}
