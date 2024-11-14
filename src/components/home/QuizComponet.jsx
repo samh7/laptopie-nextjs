@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import { useState } from "react";
 import {
   BiLaptop,
@@ -218,9 +218,11 @@ const getOptionIcon = (optionTitle) => {
   return iconMap[optionTitle] || <BiLaptop className="text-xl" />;
 };
 
-export default function QuizComponet({ onQuizComplete, getRecsName }) {
+export default function QuizComponet({ onQuizComplete, getRecsName, submitName}) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
+  // const [submitName, setSubmitName] = useState("Submit");
+
   useState(() => {
     console.log(answers);
   }, [answers]);
@@ -266,7 +268,9 @@ export default function QuizComponet({ onQuizComplete, getRecsName }) {
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
     } else {
+      // setSubmitName("")
       onQuizComplete(answers);
+      // setSubmitName("Submit");
     }
   };
 
@@ -314,16 +318,19 @@ export default function QuizComponet({ onQuizComplete, getRecsName }) {
         </div>
 
         {/* Options Grid */}
-        <div className={cn(
-          "grid gap-4",
-          // Adjust grid columns based on number of options
-          question.options.length <= 2 ? "grid-cols-1" : 
-          question.options.length <= 4 ? "grid-cols-1 md:grid-cols-2" :
-          "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
-          // Add max-width constraints based on number of options
-          question.options.length <= 2 ? "max-w-2xl mx-auto" :
-          "w-full"
-        )}>
+        <div
+          className={cn(
+            "grid gap-4",
+            // Adjust grid columns based on number of options
+            question.options.length <= 2
+              ? "grid-cols-1"
+              : question.options.length <= 4
+              ? "grid-cols-1 md:grid-cols-2"
+              : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
+            // Add max-width constraints based on number of options
+            question.options.length <= 2 ? "max-w-2xl mx-auto" : "w-full"
+          )}
+        >
           {question.options.map((option, index) => {
             const isSelected = isOptionSelected(option);
             const isDisabled = !isSelected && isMaxSelectionsReached();
@@ -345,17 +352,23 @@ export default function QuizComponet({ onQuizComplete, getRecsName }) {
                 >
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
-                      <div className={cn(
-                        "w-10 h-10 rounded-full flex items-center justify-center shrink-0",
-                        isSelected ? "bg-primary text-primary-foreground" : "bg-muted"
-                      )}>
+                      <div
+                        className={cn(
+                          "w-10 h-10 rounded-full flex items-center justify-center shrink-0",
+                          isSelected
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-muted"
+                        )}
+                      >
                         {getOptionIcon(option.title)}
                       </div>
                       <div className="space-y-1">
-                        <h4 className={cn(
-                          "font-medium",
-                          isSelected && "text-primary"
-                        )}>
+                        <h4
+                          className={cn(
+                            "font-medium",
+                            isSelected && "text-primary"
+                          )}
+                        >
                           {option.title}
                         </h4>
                         <p className="text-sm text-muted-foreground">
@@ -385,30 +398,31 @@ export default function QuizComponet({ onQuizComplete, getRecsName }) {
         )}
 
         <div className="ml-auto flex gap-2">
-          {answers[question.id]?.length > 0 && currentQuestion < questions.length - 1 && (
-            <Button
-              onClick={goToNextQuestion}
-              className="flex items-center gap-2"
-            >
-              Next
-              <BiRightArrowAlt className="h-4 w-4" />
-            </Button>
-          )}
+          {answers[question.id]?.length > 0 &&
+            currentQuestion < questions.length - 1 && (
+              <Button
+                onClick={goToNextQuestion}
+                className="flex items-center gap-2"
+              >
+                Next
+                <BiRightArrowAlt className="h-4 w-4" />
+              </Button>
+            )}
 
-          {currentQuestion === questions.length - 1 && answers[question.id]?.length > 0 && (
-            <Button
-              onClick={() => onQuizComplete(answers)}
-              className="flex items-center gap-2 min-w-[200px] justify-center"
-            >
-              {getRecsName || (
-                <>
+          {currentQuestion === questions.length - 1 &&
+            answers[question.id]?.length > 0 && (
+              <Button
+                onClick={() => onQuizComplete(answers)}
+                className="min-w-[100px]"
+                disabled={submitName === ""}
+              >
+                {submitName === "" ? (
                   <BiLoaderCircle className="h-4 w-4 animate-spin" />
-                  Getting Recommendations...
-                </>
-              )}
-              {getRecsName && <BiRightArrowAlt className="h-4 w-4" />}
-            </Button>
-          )}
+                ) : (
+                  submitName 
+                )}
+              </Button>
+            )}
         </div>
       </div>
     </div>

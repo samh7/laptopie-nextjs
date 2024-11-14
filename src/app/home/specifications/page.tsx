@@ -21,7 +21,7 @@ export default function Specifications() {
   }, [searchTerm]);
 
   return (
-    <div className="min-h-screen bg-[#fafafa]">
+    <div className="min-h-screen px-4">
       <HeroSection />
       <SearchSection searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <SpesList filteredSpecs={filteredSpecs} />

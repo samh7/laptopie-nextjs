@@ -2,21 +2,35 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { BiPencil, BiLoaderCircle } from "react-icons/bi";
+import { BiLoaderCircle, BiPencil } from "react-icons/bi";
 import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { getRecommendations } from "@/lib/action";
+import { setLaptopsLocalStore } from "@/lib/utils";
+import { redirect } from "next/navigation";
 // import { default } from '../../../tailwind.config';
 
 interface InputOptionProps {
-  describe: () => void;
-  submitName: string;
-  textAreaRef: React.RefObject<HTMLTextAreaElement>;
+  // describe: () => void;
+  // submitName: string;
+  // textAreaRef: React.RefObject<HTMLTextAreaElement>;
 }
 
-export default function DescribeSection({
-  describe,
-  submitName,
-  textAreaRef,
-}: InputOptionProps) {
+export default function DescribeSection({}: InputOptionProps) {
+  const [submitName, setSubmitName] = useState("Submit");
+
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const describe = async () => {
+    setSubmitName("");
+    const data = textAreaRef.current?.value;
+    const res = await getRecommendations(data as string);
+    const recommendations = res.aai;
+    console.log(res.aai);
+    setLaptopsLocalStore(recommendations);
+    setSubmitName("Submit");
+    redirect("/home/recommendations");
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -37,10 +51,10 @@ export default function DescribeSection({
             ref={textAreaRef}
             className="min-h-[200px] resize-none"
             placeholder="Tell us about your ideal laptop. Consider mentioning:
-• Your intended use (gaming, work, study, etc.)
-• Preferred features (screen size, battery life, etc.)
-• Any specific requirements (budget, portability, etc.)
-• Performance needs (light browsing or heavy multitasking)"
+1. Your intended use (gaming, work, study, etc.)
+2. Preferred features (screen size, battery life, etc.)
+3. Any specific requirements (budget, portability, etc.)
+4. Performance needs (light browsing or heavy multitasking)"
             maxLength={350}
           />
           <div className="flex items-center justify-between">

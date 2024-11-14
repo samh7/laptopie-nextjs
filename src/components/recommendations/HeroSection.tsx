@@ -31,15 +31,15 @@ export default function HeroSection({
           {/* Price Range Card */}
           <Card className="lg:col-span-4">
             <CardHeader>
-              <CardTitle>Investment Range</CardTitle>
+              <CardTitle>Price Range</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
                 <div className="flex justify-between mb-2">
-                  <span className="text-3xl font-bold">
+                  <span className="text-3xl  md:text-2xl font-bold">
                     KSH.{Math.min(...reccomendations.map((l) => l.priceRange)).toLocaleString()}
                   </span>
-                  <span className="text-3xl font-bold">
+                  <span className="text-3xl md:text-2xl font-bold">
                   KSH.{Math.max(...reccomendations.map((l) => l.priceRange)).toLocaleString()}
                   </span>
                 </div>

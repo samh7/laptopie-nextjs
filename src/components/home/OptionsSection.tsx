@@ -47,8 +47,9 @@ export default function OptionsSection({ activeOption, setActiveOption }: Option
                 <div className="space-y-2 text-center">
                   <h3 className="font-semibold text-xl">Answer Questions</h3>
                   <p className="text-muted-foreground text-sm">
-                    Get recommendations by answering a few simple questions about your needs
+                    Get recommendations by answering a few simple questions
                   </p>
+                  <p className="text-muted-foreground text-sm">about your needs</p>
                 </div>
               </Button>
             </motion.div>
@@ -71,8 +72,9 @@ export default function OptionsSection({ activeOption, setActiveOption }: Option
                 <div className="space-y-2 text-center">
                   <h3 className="font-semibold text-xl">Describe Your Needs</h3>
                   <p className="text-muted-foreground text-sm">
-                    Tell us about your ideal laptop in your own words
+                    Tell us about your ideal laptop 
                   </p>
+                  <p className="text-muted-foreground text-sm">in your own words</p>
                 </div>
               </Button>
             </motion.div>

@@ -1,6 +1,5 @@
 "use client";
 import { useRef, useState } from "react";
-import { BiLoaderCircle } from "react-icons/bi";
 import { HeroSection } from "@/components/home/HeroSection";
 import { QuizAnswers } from "@/lib/interfaces/interfaces";
 import { deleteLaptopsLocalStore, setLaptopsLocalStore } from "@/lib/utils";
@@ -16,10 +15,11 @@ export default function Home() {
   const [activeOption, setActiveOption] = useState("");
 
   const [getRecsName, setGetRecsName] = useState<string>("Get Recommendations");
-  const [submitName, setSubmitName] = useState<string | JSX.Element>("Submit");
+  const [submitName, setSubmitName] = useState("Submit");
 
   const handleUserAnswer = async (data: QuizAnswers) => {
     setGetRecsName("");
+    setSubmitName("")
     const res = await getRecommendations(data as QuizAnswers);
     try {
       deleteLaptopsLocalStore();
@@ -31,21 +31,12 @@ export default function Home() {
     setLaptopsLocalStore(apiReccomendations);
 
     setGetRecsName("Get Recommendations");
+    setSubmitName("Submit")
 
     redirect("/home/recommendations");
   };
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
-  const describe = async () => {
-    setSubmitName(<BiLoaderCircle className="text-xl animate-spin" />);
-    const data = textAreaRef.current?.value;
-    const res = await getRecommendations(data as string);
-    const recommendations = res.aai;
-    console.log(res.aai);
-    setLaptopsLocalStore(recommendations);
-    setSubmitName("Submit");
-    redirect("/home/recommendations");
-  };
 
   return (
     <div className="min-h-screen">
@@ -61,11 +52,11 @@ export default function Home() {
       />
       <div className="mt-4">
         <InputOption
-          describe={describe}
-          submitName={submitName}
           activeOption={activeOption}
           getRecsName={setGetRecsName}
           handleUserAnswer={handleUserAnswer}
+          submitName={submitName}
+          setSubmitName={setSubmitName}
         />
       </div>
 
