@@ -16,7 +16,7 @@ export default async function RootLayout({
 }>) {
   const session = await getServerSession(authOptions);
   return (
-    <div className="w-screen px-5" >
+    <div className="w-screen" >
       <Header userLoggedIn={session ? true : false} />
 
       <main className="flex min-h-screen flex-col items-center justify-between">
