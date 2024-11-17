@@ -1,7 +1,6 @@
 import LaptopTips from "@/components/index/LaptopTips";
 import Testimonials from "@/components/index/Testimonials";
 import PricingSection from "@/components/index/PricingSection";
-import FAQSection from "@/components/index/FAQSection";
 import CTASection from "@/components/index/CTASection";
 import UseCases from "@/components/index/UseCases";
 import FeaturesSection from "@/components/index/FeaturesSection";
@@ -32,7 +31,7 @@ export default async function Index() {
         <LaptopTips />
         <Testimonials />
         <PricingSection />
-        <FAQSection />
+        {/* <FAQSection /> */}
       </div>
 
       <CTASection />

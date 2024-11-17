@@ -32,19 +32,19 @@ export function HeroSection({
             {/* Quick Action Buttons */}
             <div className="flex flex-wrap gap-3">
               <Button asChild>
-                <Link href="/recommendations" className="group">
+                <Link href="#recommendations" className="group">
                   <Plus className="mr-2 h-4 w-4" />
                   New Recommendation
                 </Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link href="/search">
+                <Link href="/home#recommendations">
                   <Search className="mr-2 h-4 w-4" />
                   Browse Laptops
                 </Link>
               </Button>
               <Button variant="secondary" asChild>
-                <Link href="/history">
+                <Link href="/home#recommendations">
                   <History className="mr-2 h-4 w-4" />
                   View History
                 </Link>

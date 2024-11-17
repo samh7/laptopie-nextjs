@@ -19,7 +19,7 @@ export default function Home() {
 
   const handleUserAnswer = async (data: QuizAnswers) => {
     setGetRecsName("");
-    setSubmitName("")
+    setSubmitName("");
     const res = await getRecommendations(data as QuizAnswers);
     try {
       deleteLaptopsLocalStore();
@@ -31,12 +31,11 @@ export default function Home() {
     setLaptopsLocalStore(apiReccomendations);
 
     setGetRecsName("Get Recommendations");
-    setSubmitName("Submit")
+  setSubmitName("Submit");
 
     redirect("/home/recommendations");
   };
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-
 
   return (
     <div className="min-h-screen">
@@ -46,10 +45,12 @@ export default function Home() {
         imageSrc="/873966.jpg"
       />
 
-      <OptionsSection
-        activeOption={activeOption}
-        setActiveOption={setActiveOption}
-      />
+      <div id="recommendations">
+        <OptionsSection
+          activeOption={activeOption}
+          setActiveOption={setActiveOption}
+        />
+      </div>
       <div className="mt-4">
         <InputOption
           activeOption={activeOption}

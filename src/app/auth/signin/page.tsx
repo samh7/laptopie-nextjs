@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -253,6 +254,11 @@ export default function SignIn() {
               ? "Send Magic Link"
               : "Sign In"}
           </Button>
+          <div className="flex justify-center hover:scale-[1.04] transition-all duration-300 ease-in-out items-center gap-2">
+            <a href="/">Go Home</a>
+            <ArrowRight className="w-4 h-4" />
+          </div>
+          {/* <Link href="/home">Go to Home</Link> */}
         </form>
       </div>
     </div>

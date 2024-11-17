@@ -15,7 +15,7 @@ export default function Testimonials() {
         </p>
       </div>
 
-      <div className="mx-auto grid gap-4 sm:grid-cols-2 md:max-w-[64rem]">
+      <div className="mx-auto flex flex-col  items-center md:grid gap-4 sm:grid-cols-2   md:max-w-[64rem]">
         {[
           {
             name: "Brad Justin",
@@ -28,7 +28,7 @@ export default function Testimonials() {
             text: "The recommendations are so accurate. I have been using the laptop for my video editing tasks for about 3 years now and it's still a beast. Laptopie is the best.",
           },
         ].map((testimonial) => (
-          <Card key={testimonial.name} className="flex flex-col">
+          <Card key={testimonial.name} className="flex w-[80vw] md:w-[35vw] flex-col">
             <CardContent className="grid gap-4 p-6">
               <QuoteIcon className="h-5 w-5 text-muted-foreground" />
               <p className="text-sm leading-normal">{testimonial.text}</p>
