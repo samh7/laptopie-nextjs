@@ -357,64 +357,70 @@ export const specifications: Specification[] = [
   },
 ];
 
-export const laptopCategories = [
+// changet this name
+export interface PopularCategoriesProps {
+  icon: JSX.Element;
+  title: string;
+  description: string;
+  specs: string;
+}
+
+export const laptopCategories: PopularCategoriesProps[] = [
   {
     icon: <FaGamepad className="text-3xl" />,
     title: "Gaming",
     description: "High-performance laptops with dedicated GPUs",
-    specs: "RTX 4000 Series • 32GB RAM • 1TB SSD",
+    specs: "RTX 4000 Series => 32GB RAM => 1TB SSD",
   },
   {
     icon: <FaGraduationCap className="text-3xl" />,
     title: "Student",
     description: "Lightweight and affordable laptops for education",
-    specs: "12+ Hour Battery • 8GB RAM • 256GB SSD",
+    specs: "12+ Hour Battery => 8GB RAM => 256GB SSD",
   },
   {
     icon: <FaBriefcase className="text-3xl" />,
     title: "Business",
     description: "Professional laptops with security features",
-    specs: "Intel vPro • 16GB RAM • Fingerprint Reader",
+    specs: "Intel vPro => 16GB RAM => Fingerprint Reader",
   },
   {
     icon: <FaChartLine className="text-3xl" />,
     title: "Creator",
     description: "Powerful laptops for content creation",
-    specs: "Color Accurate Display • 32GB RAM • RTX GPU",
+    specs: "Color Accurate Display => 32GB RAM => RTX GPU",
   },
 ];
 
-export const specGuides = [
+// change this name
+export interface SpecGuideProps {
+  icon: JSX.Element;
+  title: string;
+  description: string;
+  items: string[];
+}
+export const specGuides: PopularCategoriesProps[] = [
   {
     icon: <BsCpu className="text-3xl" />,
     title: "Processor (CPU)",
     description:
       "The brain of your laptop. Intel and AMD offer various options:",
-    items: [
-      "i3/Ryzen 3: Basic tasks",
-      "i5/Ryzen 5: Everyday use",
-      "i7/Ryzen 7: Heavy workloads",
-    ],
+    specs:
+      "i3/Ryzen 3: Basic tasks => i5/Ryzen 5: Everyday use => i7/Ryzen 7: Heavy workloads",
   },
   {
     icon: <BsMemory className="text-3xl" />,
     title: "Memory (RAM)",
     description: "Determines how many tasks you can run simultaneously:",
-    items: [
-      "8GB: Basic multitasking",
-      "16GB: Recommended for most",
-      "32GB: Professional work",
-    ],
+    specs:
+      "8GB: Basic multitasking => 16GB: Recommended for most => 32GB: Professional work",
   },
   {
     icon: <BsGpuCard className="text-3xl" />,
     title: "Graphics Card",
     description: "Handles visual processing for gaming and creative work:",
-    items: [
-      "Integrated: Casual use",
-      "RTX 3050: Entry gaming",
-      "RTX 4070+: Professional",
-    ],
+    specs:
+      "Integrated: Casual use=>RTX 3050: Entry gaming=>RTX 4070+: Professional",
   },
 ];
 
@@ -547,9 +553,6 @@ export function getRandomLaptopImage(laptopName: string) {
     : genericImage;
 }
 
-
-
-
 export const RecommnedationString: string = `interface LaptopSpecs {
   cpu: string;
   gpu: string;
@@ -577,7 +580,7 @@ interface Recommnedation {
 
 `;
 
-export  const userAnswers: Laptop[] = [
+export const userAnswers: Laptop[] = [
   {
     name: "Acer Swift 3 SF314-512",
     imageUrl:

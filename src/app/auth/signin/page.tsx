@@ -5,7 +5,7 @@ import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 
 export default function SignIn() {
   const router = useRouter();
@@ -117,7 +117,7 @@ export default function SignIn() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Toaster position="top-center" expand={true} richColors closeButton />
+      {/* <Toaster position="top-center" expand={true} richColors /> */}
       <div className="flex flex-col items-center space-y-4 w-full max-w-md px-4">
         <div className="flex flex-col gap-4 w-full">
           <Button
@@ -246,7 +246,7 @@ export default function SignIn() {
             // className={`rounded-lg bg-blue-600 px-6 py-3 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center`}
           >
             {isLoading ? (
-              <span className="inline-block animate-spin rounded-full h-4 w-4 border-t-2 border-white mr-2" />
+              <span className="inline-block animate-spin rounded-full h-4 w-4 border-2 border-r-2 border-white border-r-transparent mr-2" />
             ) : null}
             {isRegistering
               ? "Register"

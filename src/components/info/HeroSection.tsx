@@ -17,9 +17,9 @@ export default function HeroSection({
 
   return (
     <section className="border-b bg-background">
-      <div className="container px-4 py-20 mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
+      <div className="md:w-[95vw] px-4 py-20 mx-auto">
+        <div className="flex flex-col md:flex-row md:justify-center start gap-12 ">
+          <div className="space-y-8  md:mt-14">
             <div className="space-y-6">
               <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
                 {reccomendedLaptop?.name}
@@ -32,7 +32,7 @@ export default function HeroSection({
               <span className="text-3xl font-bold">
                 KSH.{reccomendedLaptop?.priceRange.toLocaleString()}
               </span>
-              <Button 
+              <Button
                 variant="outline"
                 onClick={handlePrint}
                 className="inline-flex items-center gap-2"
@@ -47,7 +47,7 @@ export default function HeroSection({
             <img
               src={image}
               alt={reccomendedLaptop?.name}
-              className="relative rounded-xl border bg-muted w-full object-cover hover:scale-[1.02] transition duration-300"
+              className="relative rounded-xl  border bg-muted w-full object-cover hover:scale-[1.02] transition duration-300"
             />
           </div>
         </div>

@@ -1,7 +1,6 @@
 "use client";
 import { SessionProvider } from "next-auth/react";
 import { useAuthCheck } from '@/hooks/useAuthCheck';
-import { Toaster } from 'sonner';
 
 function AuthCheck({ children }: { children: React.ReactNode }) {
   useAuthCheck();
@@ -14,11 +13,11 @@ export default function NextAuthProvider({ children }: { children: React.ReactNo
       <AuthCheck>
         {children}
       </AuthCheck>
-      <Toaster 
+      {/* <Toaster 
         position="top-center"
         expand={true}
         richColors
-      />
+      /> */}
     </SessionProvider>
   );
 }

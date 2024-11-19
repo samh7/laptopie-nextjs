@@ -15,7 +15,7 @@ export default function Results({
 }) {
   return (
     <div className="container py-8 bg-white">
-      <Card className="shadow-lg">
+      <Card className="">
         <CardHeader className="border-b ">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-primary/10 rounded-full">
@@ -45,11 +45,11 @@ export default function Results({
                   <div className="flex flex-col md:flex-row gap-8">
                     {/* Laptop Image */}
                     <div className="md:w-1/3">
-                      <div className="aspect-[4/3] rounded-xl overflow-hidden border bg-background shadow-sm group-hover:shadow-md transition-all">
+                      <div className="aspect-[4/3] rounded-xl overflow-hidden border bg-background  transition-all">
                         <img
                           src={laptopImages[laptop.name] || "/laptop_brands/generic.jpg"}
                           alt={laptop.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                         />
                       </div>
                     </div>
@@ -58,7 +58,7 @@ export default function Results({
                     <div className="md:w-2/3 space-y-6">
                       <div>
                         <div className="flex items-start justify-between gap-4 mb-3">
-                          <h2 className="text-2xl font-semibold group-hover:text-primary transition-colors">
+                          <h2 className="text-2xl font-semibold hover:text-primary transition-colors">
                             {laptop.name}
                           </h2>
                           <div className="flex flex-col items-end">
@@ -115,7 +115,7 @@ export default function Results({
                             ))}
                           </div>
                         </div>
-                        <div className="flex items-center gap-2 text-primary font-medium group-hover:translate-x-2 transition-all duration-300">
+                        <div className="flex items-center gap-2 text-primary font-medium hover:translate-x-2 transition-all duration-300">
                           <span>View Details</span>
                           <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
                             <FaArrowRight className="text-sm" />

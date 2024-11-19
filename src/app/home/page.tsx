@@ -7,9 +7,9 @@ import { getRecommendations } from "@/lib/action";
 import { redirect } from "next/navigation";
 import InputOption from "@/components/home/InputOption";
 import PopularCategories from "@/components/home/PopularCategories";
-import SpecGuide from "@/components/home/SpecGuide";
 import DetailedSpecs from "@/components/home/DetailedSpecs";
 import OptionsSection from "@/components/home/OptionsSection";
+import { laptopCategories, specGuides } from "@/data/data";
 
 export default function Home() {
   const [activeOption, setActiveOption] = useState("");
@@ -31,7 +31,7 @@ export default function Home() {
     setLaptopsLocalStore(apiReccomendations);
 
     setGetRecsName("Get Recommendations");
-  setSubmitName("Submit");
+    setSubmitName("Submit");
 
     redirect("/home/recommendations");
   };
@@ -62,8 +62,11 @@ export default function Home() {
       </div>
 
       {/* <LaptopHistory/> */}
-      <PopularCategories />
-      <SpecGuide />
+      {/* <div className="flex flex-col gap-4 justify-center items-center"> */}
+        <PopularCategories items={laptopCategories} />
+        <PopularCategories items={specGuides} />
+      {/* </div> */}
+      {/* <SpecGuide /> */}
       <DetailedSpecs />
     </div>
   );
