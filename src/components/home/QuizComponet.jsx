@@ -218,10 +218,9 @@ const getOptionIcon = (optionTitle) => {
   return iconMap[optionTitle] || <BiLaptop className="text-xl" />;
 };
 
-export default function QuizComponet({ onQuizComplete, getRecsName, submitName}) {
+export default function QuizComponet({ onQuizComplete, submitName }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
-  // const [submitName, setSubmitName] = useState("Submit");
 
   useState(() => {
     console.log(answers);
@@ -344,7 +343,7 @@ export default function QuizComponet({ onQuizComplete, getRecsName, submitName})
               >
                 <Card
                   className={cn(
-                    "cursor-pointer transition-all hover:shadow-md h-full", // Added h-full
+                    "cursor-pointer transition-all hover:shadow-md h-full", 
                     isSelected && "border-primary ring-2 ring-primary/20",
                     isDisabled && "opacity-50 cursor-not-allowed"
                   )}
@@ -419,7 +418,7 @@ export default function QuizComponet({ onQuizComplete, getRecsName, submitName})
                 {submitName === "" ? (
                   <BiLoaderCircle className="h-4 w-4 animate-spin" />
                 ) : (
-                  submitName 
+                  submitName
                 )}
               </Button>
             )}

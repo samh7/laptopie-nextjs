@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
+import { BiLoaderCircle } from "react-icons/bi";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { toast } from "sonner";
 
@@ -116,151 +117,153 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      {/* <Toaster position="top-center" expand={true} richColors /> */}
-      <div className="flex flex-col items-center space-y-4 w-full max-w-md px-4">
-        <div className="flex flex-col gap-4 w-full">
-          <Button
-            onClick={() => handleOAuthSignIn("github")}
-            disabled={isLoading}
-            variant="default"
-            className="w-full flex items-center justify-center gap-2 rounded-lg bg-gray-900 px-6 py-3 text-white hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <FaGithub />
-            Sign in with GitHub
-          </Button>
-
-          <Button
-            onClick={() => handleOAuthSignIn("google")}
-            disabled={isLoading}
-            className="w-full flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-gray-900 hover:bg-gray-50 border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <FaGoogle />
-            Sign in with Google
-          </Button>
-        </div>
-
-        <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-          <p className="mx-4 mb-0 text-center font-semibold text-slate-500">
-            Or
-          </p>
-        </div>
-
-        <div className="flex gap-4 w-full">
-          <Button
-            onClick={() => {
-              setIsRegistering(false);
-              setIsEmailSignIn(false);
-            }}
-            className={`flex-1 px-4 py-2 rounded ${
-              !isRegistering && !isEmailSignIn
-                ? "bg-gray-900 text-white"
-                : "bg-gray-200 text-gray-900 hover:text-white"
-            }`}
-          >
-            Sign In
-          </Button>
-          <Button
-            onClick={() => {
-              setIsRegistering(true);
-              setIsEmailSignIn(false);
-            }}
-            className={`flex-1 px-4 py-2 rounded ${
-              isRegistering
-                ? "bg-gray-900 text-white"
-                : "bg-gray-200 text-gray-900 hover:text-white"
-            }`}
-          >
-            Register
-          </Button>
-          <Button
-            variant="default"
-            onClick={() => {
-              setIsRegistering(false);
-              setIsEmailSignIn(true);
-            }}
-            className={`flex-1 px-4 py-2  rounded ${
-              isEmailSignIn
-                ? "bg-gray-900  text-white"
-                : "bg-gray-200  text-gray-900 hover:text-white"
-            }`}
-          >
-            Magic Link
-          </Button>
-        </div>
-
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col space-y-4 w-full"
-        >
-          {(isRegistering || isEmailSignIn) && (
-            <input
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="rounded-lg border border-gray-300 px-4 py-3"
-              required
+ 
+      <div className="flex min-h-screen flex-col items-center justify-center py-2">
+        {/* <Toaster position="top-center" expand={true} richColors /> */}
+        <div className="flex flex-col items-center space-y-4 w-full max-w-md px-4">
+          <div className="flex flex-col gap-4 w-full">
+            <Button
+              onClick={() => handleOAuthSignIn("github")}
               disabled={isLoading}
-            />
-          )}
+              variant="default"
+              className="w-full flex items-center justify-center gap-2 rounded-lg bg-gray-900 px-6 py-3 text-white hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <FaGithub />
+              Sign in with GitHub
+            </Button>
 
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="rounded-lg border border-gray-300 px-4 py-3"
-            required
-            disabled={isLoading}
-          />
-
-          {!isEmailSignIn && !isRegistering && (
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="rounded-lg border border-gray-300 px-4 py-3"
-              required
+            <Button
+              onClick={() => handleOAuthSignIn("google")}
               disabled={isLoading}
-            />
-          )}
-
-          {isRegistering && (
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="rounded-lg border border-gray-300 px-4 py-3"
-              required
-              disabled={isLoading}
-            />
-          )}
-
-          <Button
-            type="submit"
-            disabled={isLoading}
-            variant="default"
-            // className={`rounded-lg bg-blue-600 px-6 py-3 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center`}
-          >
-            {isLoading ? (
-              <span className="inline-block animate-spin rounded-full h-4 w-4 border-2 border-r-2 border-white border-r-transparent mr-2" />
-            ) : null}
-            {isRegistering
-              ? "Register"
-              : isEmailSignIn
-              ? "Send Magic Link"
-              : "Sign In"}
-          </Button>
-          <div className="flex justify-center hover:scale-[1.04] transition-all duration-300 ease-in-out items-center gap-2">
-            <a href="/">Go Home</a>
-            <ArrowRight className="w-4 h-4" />
+              className="w-full flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-gray-900 hover:bg-gray-50 border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <FaGoogle />
+              Sign in with Google
+            </Button>
           </div>
-          {/* <Link href="/home">Go to Home</Link> */}
-        </form>
+
+          <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+            <p className="mx-4 mb-0 text-center font-semibold text-slate-500">
+              Or
+            </p>
+          </div>
+
+          <div className="flex gap-4 w-full">
+            <Button
+              onClick={() => {
+                setIsRegistering(false);
+                setIsEmailSignIn(false);
+              }}
+              className={`flex-1 px-4 py-2 rounded ${
+                !isRegistering && !isEmailSignIn
+                  ? "bg-gray-900 text-white"
+                  : "bg-gray-200 text-gray-900 hover:text-white"
+              }`}
+            >
+              Sign In
+            </Button>
+            <Button
+              onClick={() => {
+                setIsRegistering(true);
+                setIsEmailSignIn(false);
+              }}
+              className={`flex-1 px-4 py-2 rounded ${
+                isRegistering
+                  ? "bg-gray-900 text-white"
+                  : "bg-gray-200 text-gray-900 hover:text-white"
+              }`}
+            >
+              Register
+            </Button>
+            <Button
+              variant="default"
+              onClick={() => {
+                setIsRegistering(false);
+                setIsEmailSignIn(true);
+              }}
+              className={`flex-1 px-4 py-2  rounded ${
+                isEmailSignIn
+                  ? "bg-gray-900  text-white"
+                  : "bg-gray-200  text-gray-900 hover:text-white"
+              }`}
+            >
+              Magic Link
+            </Button>
+          </div>
+
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col space-y-4 w-full"
+          >
+            {(isRegistering || isEmailSignIn) && (
+              <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="rounded-lg border border-gray-300 px-4 py-3"
+                required
+                disabled={isLoading}
+              />
+            )}
+
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="rounded-lg border border-gray-300 px-4 py-3"
+              required
+              disabled={isLoading}
+            />
+
+            {!isEmailSignIn && !isRegistering && (
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="rounded-lg border border-gray-300 px-4 py-3"
+                required
+                disabled={isLoading}
+              />
+            )}
+
+            {isRegistering && (
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="rounded-lg border border-gray-300 px-4 py-3"
+                required
+                disabled={isLoading}
+              />
+            )}
+
+            <Button
+              type="submit"
+              disabled={isLoading}
+              variant="default"
+              // className={`rounded-lg bg-blue-600 px-6 py-3 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center`}
+            >
+              {isLoading ? (
+                <BiLoaderCircle className="h-4 w-4 animate-spin" />
+              ) : null}
+              {isRegistering
+                ? "Register"
+                : isEmailSignIn
+                ? "Send Magic Link"
+                : "Sign In"}
+            </Button>
+            <div className="flex justify-center hover:scale-[1.04] transition-all duration-300 ease-in-out items-center gap-2">
+              <a href="/">Go Home</a>
+              <ArrowRight className="w-4 h-4" />
+            </div>
+            {/* <Link href="/home">Go to Home</Link> */}
+          </form>
+        </div>
       </div>
-    </div>
+    // </Suspense>
   );
 }

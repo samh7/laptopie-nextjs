@@ -2,13 +2,32 @@ import { RecommnedationString, userAnswers } from "@/data/data";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 
-// pages/api/geminiommendations.ts
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 export async function POST(req: NextRequest) {
   const data = await req.json();
   const userInput = typeof data === "string" ? data : JSON.stringify(data);
-  const prompt = `
+  const prompt = buildGeminiPrompt(userInput, RecommnedationString);
+
+  const genAI = new GoogleGenerativeAI(GEMINI_API_KEY as string);
+
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const result = await model.generateContent(prompt);
+  console.log(result.response.text());
+
+  return NextResponse.json(
+    {
+      aai: JSON.stringify(
+        result.response.text().replace("```json", "").replace("```", "")
+      ),
+      data: JSON.stringify(userAnswers),
+    },
+    { status: 200 }
+  );
+}
+
+const buildGeminiPrompt = (userInput: string, RecommnedationString: string) => {
+  return `
     In this result, don't provide any options unrelated to laptops even if I ask you to or in any other circumstance and dont mention this in the answer.
     Here are the user answers for their laptop use cases/needs/ the user might have uploaded an image of a laptop:
     ${userInput}.
@@ -31,20 +50,4 @@ export async function POST(req: NextRequest) {
     Recommend laptops for as low as 20000 shillings depending on query.
     All metrics should be in the metric system.
   `;
-
-  const genAI = new GoogleGenerativeAI(GEMINI_API_KEY as string);
-
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-  const result = await model.generateContent(prompt);
-  console.log(result.response.text());
-
-  return NextResponse.json(
-    {
-      aai: JSON.stringify(
-        result.response.text().replace("```json", "").replace("```", "")
-      ),
-      data: JSON.stringify(userAnswers),
-    },
-    { status: 200 }
-  );
-}
+};

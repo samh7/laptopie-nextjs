@@ -24,7 +24,7 @@ export default function InputOption({
       return (
         <div className="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
           <QuizComponet
-            getRecsName={getRecsName}
+            // getRecsName={getRecsName}
             onQuizComplete={(data: QuizAnswers) => {
               handleUserAnswer(data);
             }}
@@ -38,7 +38,7 @@ export default function InputOption({
       return (
         <div className="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
           <QuizComponet
-            getRecsName={getRecsName}
+            // getRecsName={getRecsName}
             onQuizComplete={(data: QuizAnswers) => {
               handleUserAnswer(data);
             }}

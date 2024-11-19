@@ -8,15 +8,7 @@ import { useRef, useState } from "react";
 import { getRecommendations } from "@/lib/action";
 import { setLaptopsLocalStore } from "@/lib/utils";
 import { redirect } from "next/navigation";
-// import { default } from '../../../tailwind.config';
-
-interface InputOptionProps {
-  // describe: () => void;
-  // submitName: string;
-  // textAreaRef: React.RefObject<HTMLTextAreaElement>;
-}
-
-export default function DescribeSection({}: InputOptionProps) {
+export default function DescribeSection() {
   const [submitName, setSubmitName] = useState("Submit");
 
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -50,11 +42,7 @@ export default function DescribeSection({}: InputOptionProps) {
           <Textarea
             ref={textAreaRef}
             className="min-h-[200px] resize-none"
-            placeholder="Tell us about your ideal laptop. Consider mentioning:
-1. Your intended use (gaming, work, study, etc.)
-2. Preferred features (screen size, battery life, etc.)
-3. Any specific requirements (budget, portability, etc.)
-4. Performance needs (light browsing or heavy multitasking)"
+            placeholder="Tell us about your ideal laptop. Consider mentioning your intended use, preferred features and budget."
             maxLength={350}
           />
           <div className="flex items-center justify-between">

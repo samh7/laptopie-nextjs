@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 export default function Header({ userLoggedIn }: { userLoggedIn: boolean }) {
   return (
     <header
-      className="relative px-5 md:px-1 md:fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md"
+      className="relative px-5 md:px-1 md:fixed top-0 left-0 right-0 z-50 bg-white/80 h-[150px] md:h-auto backdrop-blur-md"
       // initial={{ y: -100 }}
       // animate={{ y: 0 }}
       // transition={{ duration: 0.5 }}
