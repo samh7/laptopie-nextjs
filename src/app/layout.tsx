@@ -28,16 +28,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Suspense
-      fallback={
-        <div className="w-full h-screen grid place-items-center text-gray-900">
-          <BiLoaderCircle className="h-4 w-4 animate-spin" />
-        </div>
-      }
-    >
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <Suspense
+          fallback={
+            <div className="w-full h-screen grid place-items-center text-gray-900">
+              <BiLoaderCircle className="h-4 w-4 animate-spin" />
+            </div>
+          }
         >
           {/* <Header /> */}
           <NextAuthProvider>
@@ -46,9 +46,10 @@ export default function RootLayout({
               <div className="">{children}</div>
             </main>
           </NextAuthProvider>
-          {/* <Footer /> */}
-        </body>
-      </html>
-    </Suspense>
+        </Suspense>
+
+        {/* <Footer /> */}
+      </body>
+    </html>
   );
 }
