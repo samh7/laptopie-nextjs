@@ -12,7 +12,7 @@ import { PopularCategoriesProps} from "@/data/data";
 
 export default function PopularCategories({ items }: { items: PopularCategoriesProps[] }) {
   return (
-    <section className="w-full  py-12 md:py-24 lg:py-32">
+    <section className="w-full  py-12  md:py-24 lg:py-32">
       <div className="container px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -29,16 +29,16 @@ export default function PopularCategories({ items }: { items: PopularCategoriesP
           </p>
         </motion.div>
 
-        <div className="flex flex-col items-center md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        <div className="flex flex-col  items-center md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
           {items.map((category, index) => (
             <motion.div
-            className="w-[80vw] md:max-w-full"
+            className="w-[80vw] md:h-[300px] md:max-w-full"
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="h-full transition-all">
+              <Card className="h-full transition-all ">
                 <CardHeader>
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                     {category.icon}
@@ -47,7 +47,7 @@ export default function PopularCategories({ items }: { items: PopularCategoriesP
                   <CardDescription>{category.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm  text-muted-foreground">
                     {category.specs.split("=>").map(
                       (spec, i) =>
                         spec.trim() && (
