@@ -39,7 +39,7 @@ export default function OptionsSection({
             >
               <button
                 className={cn(
-                  "max-w-full  w-[400px] h-[250px] bg-gray-100 rounded-sm  p-6 flex flex-col items-center gap-4 hover:bg-blue-50 hover:border-blue-200 transition-all",
+                  "w-[90vw]  md:w-[400px] h-[250px] bg-gray-100 rounded-sm  p-6 flex flex-col items-center gap-4 hover:bg-blue-50 hover:border-blue-200 transition-all",
                   activeOption === "quiz" && "bg-blue-50  "
                 )}
                 onClick={() => setActiveOption("quiz")}
@@ -65,7 +65,7 @@ export default function OptionsSection({
             >
               <button
                 className={cn(
-                  "max-w-full w-[400px] h-[250px] p-6 flex flex-col items-center gap-4 bg-gray-100 rounded-sm hover:bg-purple-50 hover:border-purple-200 transition-all",
+                  "w-[90vw]  md:w-[400px] h-[250px] p-6 flex flex-col items-center gap-4 bg-gray-100 rounded-sm hover:bg-purple-50 hover:border-purple-200 transition-all",
                   activeOption === "describe" &&
                     "bg-purple-50 border-purple-200"
                 )}
