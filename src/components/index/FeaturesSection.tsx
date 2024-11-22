@@ -10,7 +10,7 @@ interface FeatureCardProps {
 
 const FeatureCard = ({ icon: Icon, title, description }: FeatureCardProps) => {
   return (
-    <Card className="border-none shadow-none">
+    <Card className="border-none w-full  shadow-none">
       <CardHeader>
         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
           <Icon className="h-6 w-6 text-primary" />
@@ -68,7 +68,7 @@ export default function FeaturesSection() {
           Find your perfect laptop with our intelligent recommendation system
         </p>
       </div>
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col justify-center items-center md:grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {features.map((feature, index) => (
           <FeatureCard key={index} {...feature} />
         ))}
