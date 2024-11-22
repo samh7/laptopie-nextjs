@@ -3,7 +3,6 @@ import { specsList } from "@/data/data";
 import { Laptop } from "@/lib/interfaces/interfaces";
 import { StarIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
 export default function HeroSection({
@@ -16,10 +15,10 @@ export default function HeroSection({
       <div className="container px-4 py-16 space-y-8">
         {/* Title Section */}
         <div className="space-y-4">
-          <Badge variant="secondary" className="h-8">
+          {/* <Badge variant="secondary" className="h-8">
             <StarIcon className="mr-2 h-4 w-4 text-yellow-500" />
             {reccomendations.length} Perfect Matches Found
-          </Badge>
+          </Badge> */}
           <h1 className="text-4xl font-bold tracking-tight lg:text-6xl">
             Your Ideal Laptops
             <br />
