@@ -15,8 +15,8 @@ export default function Results({
 }) {
   return (
     <div className="container py-8 bg-white">
-      <Card className="">
-        <CardHeader className="border-b ">
+      <Card className="border-none shadow-none">
+        <CardHeader className="border">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-primary/10 rounded-full">
               <FaRegStar className="text-primary text-2xl" />

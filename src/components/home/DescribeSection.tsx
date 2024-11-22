@@ -29,7 +29,7 @@ export default function DescribeSection() {
       animate={{ opacity: 1, y: 0 }}
       className="w-full max-w-3xl mx-auto"
     >
-      <Card>
+      <Card className="border-none">
         <CardHeader className="space-y-1">
           <div className="flex items-center gap-3">
             <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">

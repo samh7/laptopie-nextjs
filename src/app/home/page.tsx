@@ -51,7 +51,7 @@ export default function Home() {
           setActiveOption={setActiveOption}
         />
       </div>
-      <div className="mt-4">
+      <div className="mt-4 ">
         <InputOption
           activeOption={activeOption}
           getRecsName={setGetRecsName}
@@ -63,8 +63,8 @@ export default function Home() {
 
       {/* <LaptopHistory/> */}
       {/* <div className="flex flex-col gap-4 justify-center items-center"> */}
-        <PopularCategories items={laptopCategories} />
-        <PopularCategories items={specGuides} />
+      <PopularCategories items={laptopCategories} />
+      <PopularCategories items={specGuides} />
       {/* </div> */}
       {/* <SpecGuide /> */}
       <DetailedSpecs />
