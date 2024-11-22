@@ -3,7 +3,7 @@ import { Cpu, HardDrive, Monitor, Battery } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-background pb-[6.25rem] pt-[3.75rem]">
+    <section className="relative px-4 overflow-hidden  bg-background pb-[6.25rem] pt-[3.75rem]">
       <div className="container relative">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
           <div className="flex max-w-[46rem] flex-col">

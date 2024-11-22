@@ -14,7 +14,7 @@ export default function OptionsSection({
 }: OptionsSectionProps) {
   return (
     <div className="relative bg-white">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto  py-8">
         <div className="flex flex-col items-center space-y-8">
           {/* Section Title */}
           <motion.div

@@ -13,7 +13,7 @@ import { PopularCategoriesProps} from "@/data/data";
 export default function PopularCategories({ items }: { items: PopularCategoriesProps[] }) {
   return (
     <section className="w-full  py-12  md:py-24 lg:py-32">
-      <div className="container px-4 md:px-6">
+      <div className="container px-2 md:px-12  md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
