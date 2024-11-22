@@ -42,7 +42,7 @@ export default function RootLayout({
           {/* <Header /> */}
           <NextAuthProvider>
             <main className="flex min-h-screen min-w-screen flex-col items-center justify-center">
-              <Toaster position="top-center" expand={true} richColors />
+              <Toaster position="top-center" expand={true} closeButton={true} richColors />
               <div className="">{children}</div>
             </main>
           </NextAuthProvider>
