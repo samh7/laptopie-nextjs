@@ -16,8 +16,8 @@ export function HeroSection({
   imageSrc,
 }: HeroSectionProps) {
   return (
-    <div className="relative bg-background border-b">
-      <div className="container mx-auto px-4 py-8">
+    <div className="relative  bg-background border-b">
+      <div className="container px-5 md:px-10 mx-auto py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Welcome Section */}
           <motion.div
