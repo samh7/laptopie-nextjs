@@ -43,7 +43,11 @@ export default function Header({ userLoggedIn }: { userLoggedIn: boolean }) {
           `}
         >
           <nav className="flex flex-col md:flex-row gap-4 md:gap-8">
-            {[{key: "home", url: "home"}, {key:"Blog", url: "home"}, {key:"Contact Us",url: "home"}].map((item,) => (
+            {[
+              { key: "home", url: "home" },
+              { key: "Blog", url: "home" },
+              { key: "Contact Us", url: "home" },
+            ].map((item) => (
               <Link
                 key={item.key}
                 href={`/${item.url.toLowerCase().replace(" ", "-")}`}

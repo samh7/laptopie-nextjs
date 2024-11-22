@@ -1,5 +1,6 @@
 "use client";
 import { Cpu, HardDrive, Monitor, Battery } from "lucide-react";
+import Image from "next/image";
 
 export default function HeroSection() {
   return (
@@ -7,15 +8,16 @@ export default function HeroSection() {
       <div className="container relative">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
           <div className="flex max-w-[46rem] flex-col">
-            
-            <h1 className=" 
-            text-4xl sm:text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl">
+            <h1
+              className=" 
+            text-4xl sm:text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl"
+            >
               Understanding Laptop{" "}
               <span className="text-primary">Specifications</span>
             </h1>
             <p className="mt-6 text-lg text-muted-foreground sm:text-xl">
-              From processors to display quality, learn what each specification means 
-              and how it affects your laptop's performance.
+              From processors to display quality, learn what each specification
+              means and how it affects your laptop's performance.
             </p>
             <div className="mt-8 grid w-full grid-cols-2 gap-4">
               <div className="flex items-center gap-3 rounded-lg border bg-card p-4 shadow-sm">
@@ -36,10 +38,12 @@ export default function HeroSection() {
               </div>
             </div>
           </div>
-          
+
           <div className="relative aspect-[4/3] lg:aspect-[3/2] rounded-xl overflow-hidden shadow-xl lg:translate-x-12">
             {/* <div className="absolute inset-0 bg-gradient-to-tr from-background/90 via-background/60 to-background/20 z-10" /> */}
-            <img
+            <Image
+              width={400}
+              height={400}
               src="/873966.jpg"
               alt="Laptop Components and Specifications"
               className="object-cover w-full h-full scale-110"

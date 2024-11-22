@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 export default function HeroSection() {
   const targetRef = useRef(null);
@@ -16,26 +17,19 @@ export default function HeroSection() {
       ref={targetRef}
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background"
     >
-      <div className="absolute inset-0 bg-black">
-        <motion.img
-          className="h-full w-full object-cover opacity-20"
-          style={{
-            opacity: opacityBg,
-          }}
-          src="/downloadfree-xl@2x.jpg"
-          alt="Background pattern"
-        />
-      </div>
+      {/* <div className="absolute inset-0 bg-black"> */}
+        
+      {/* </div> */}
       <div className="absolute inset-0">
-        <motion.img
+        <Image
+          width={1000}
+          height={1000}
           className="h-full w-full object-cover"
-    
           src="/ei_1727896806410-removebg.png"
-          alt="Background pattern"
+          alt="Hero Background Image"
         />
       </div>
-      <div className="absolute inset-0 bg-[rgba(0,0,0,0.2)]">
-      </div>
+      <div className="absolute inset-0 bg-[rgba(0,0,0,0.2)]"></div>
 
       <div className="relative z-10 mx-auto max-w-[64rem] px-4 text-center sm:px-6 lg:px-8">
         <motion.div

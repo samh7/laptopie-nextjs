@@ -5,6 +5,7 @@ import { BiChip, BiCog, BiLaptop, BiMemoryCard } from "react-icons/bi";
 import { Laptop } from "@/lib/interfaces/interfaces";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 export default function Results({
   reccomendations,
@@ -46,10 +47,12 @@ export default function Results({
                     {/* Laptop Image */}
                     <div className="md:w-1/3">
                       <div className="aspect-[4/3] rounded-xl overflow-hidden border bg-background  transition-all">
-                        <img
+                        <Image
+                         width={400}
+                         height={400}
                           src={laptopImages[laptop.name] || "/laptop_brands/generic.jpg"}
                           alt={laptop.name}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                          className="w-full h-full object-cover  transition-transform duration-500"
                         />
                       </div>
                     </div>
