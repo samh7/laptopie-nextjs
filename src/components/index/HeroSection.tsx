@@ -51,7 +51,7 @@ export default function HeroSection() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
-              href={`${localStorage.getItem("token") ? "/home" : "/sign-in"}`}
+              href={"/home"}
               className="inline-flex h-11 items-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               Get Started

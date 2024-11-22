@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 
 export default function CTASection() {
   return (
@@ -12,10 +12,17 @@ export default function CTASection() {
           Get personalized recommendations based on your needs and budget.
         </p>
         <div className="flex gap-4">
+          {/* <Link href="/home"> */}
           <Button
-          size="lg" className="bg-white hover:bg-white/80 text-gray-900">
+            onClick={() => {
+              location.href = "/home";
+            }}
+            size="lg"
+            className="bg-white hover:bg-white/80 text-gray-900"
+          >
             Get Started
           </Button>
+          {/* </Link> */}
         </div>
       </div>
     </section>

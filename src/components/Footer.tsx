@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link"
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -8,7 +8,8 @@ export default function Footer() {
         <div className="flex flex-col gap-4 md:w-1/3">
           <div className="text-lg font-semibold">Laptopie</div>
           <p className="text-sm text-muted-foreground">
-            Your AI-powered laptop recommendation system. Find the perfect laptop for your needs.
+            Your AI-powered laptop recommendation system. Find the perfect
+            laptop for your needs.
           </p>
         </div>
         <div className="flex-1 grid grid-cols-2 gap-8 sm:grid-cols-3">
@@ -16,12 +17,18 @@ export default function Footer() {
             <h4 className="text-sm font-medium">Resources</h4>
             <ul className="space-y-2.5">
               <li>
-                <Link href="/home/specifications" className="text-sm text-muted-foreground hover:text-primary">
+                <Link
+                  href="/home/specifications"
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
                   Specifications
                 </Link>
               </li>
               <li>
-                <Link href="/quiz" className="text-sm text-muted-foreground hover:text-primary">
+                <Link
+                  href="/home"
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
                   Laptop Quiz
                 </Link>
               </li>
@@ -31,12 +38,18 @@ export default function Footer() {
             <h4 className="text-sm font-medium">Company</h4>
             <ul className="space-y-2.5">
               <li>
-                <Link href="/about" className="text-sm text-muted-foreground hover:text-primary">
+                <Link
+                  href="/home#"
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm text-muted-foreground hover:text-primary">
+                <Link
+                  href="/home#"
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
                   Contact
                 </Link>
               </li>
@@ -46,12 +59,18 @@ export default function Footer() {
             <h4 className="text-sm font-medium">Legal</h4>
             <ul className="space-y-2.5">
               <li>
-                <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary">
+                <Link
+                  href="/home#"
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
                   Privacy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary">
+                <Link
+                  href="/home#"
+                  className="text-sm text-muted-foreground hover:text-primary"
+                >
                   Terms
                 </Link>
               </li>
@@ -67,5 +86,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
-} 
+  );
+}
