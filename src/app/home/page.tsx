@@ -45,13 +45,13 @@ export default function Home() {
         imageSrc="/873966.jpg"
       />
 
-      <div id="recommendations">
+      <div id="recommendations" className="px-10">
         <OptionsSection
           activeOption={activeOption}
           setActiveOption={setActiveOption}
         />
       </div>
-      <div className="mt-4 ">
+      <div className="mt-4 px-10">
         <InputOption
           activeOption={activeOption}
           getRecsName={setGetRecsName}
