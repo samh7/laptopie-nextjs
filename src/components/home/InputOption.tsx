@@ -22,7 +22,7 @@ export default function InputOption({
   switch (activeOption) {
     case "quiz":
       return (
-        <div className="bg-white rounded-xl shadow-sm p-8  border-gray-100">
+        <div className="bg-white rounded-xl  ">
           <QuizComponet
             // getRecsName={getRecsName}
             onQuizComplete={(data: QuizAnswers) => {
@@ -36,7 +36,7 @@ export default function InputOption({
       return <DescribeSection />;
     default:
       return (
-        <div className="bg-white rounded-xl shadow-sm p-8  border-gray-100">
+        <div className="bg-white rounded-xl ">
           <QuizComponet
             // getRecsName={getRecsName}
             onQuizComplete={(data: QuizAnswers) => {
