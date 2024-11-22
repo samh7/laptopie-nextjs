@@ -3,7 +3,7 @@ import { FiCheck } from "react-icons/fi";
 
 export default function PricingSection() {
   return (
-    <section className="py-16 sm:py-20">
+    <section className="w-full py-16 sm:py-20">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center gap-4 text-center">
           <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
